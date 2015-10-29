@@ -1,27 +1,73 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/film_background">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world"
-        android:id="@+id/textView" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="76dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <Button
+            android:text="Выбор фильма"
+            android:id="@+id/btn_select"
+            android:textSize="22sp"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="15"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#4D0A0A"
+            android:shadowColor="#FFBFCA"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:text="Поиск фильма"
+            android:id="@+id/btn_search"
+            android:textSize="22sp"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="15"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#4D0A0A"
+            android:shadowColor="#FFBFCA"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:text="Просмотренные"
+            android:id="@+id/btn_watched"
+            android:textSize="22sp"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="15"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#4D0A0A"
+            android:shadowColor="#FFBFCA"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:text="О приложении"
+            android:id="@+id/btn_about"
+            android:textSize="22sp"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="15"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#4D0A0A"
+            android:shadowColor="#FFBFCA"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
