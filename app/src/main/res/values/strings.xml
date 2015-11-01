@@ -7,4 +7,6 @@
     <string name="title_activity_select">SelectActivity</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_whatched">WhatchedActivity</string>
+    <string name="title_activity_add">Добавить</string>
+    <string name="Add">New Button</string>
 </resources>

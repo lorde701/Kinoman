@@ -8,12 +8,30 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
+
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button btn_about;
     Button btn_select;
     Button btn_search;
     Button btn_watched;
+    Button btn_add;
+    final String LOG_TAG = "myLogs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn_watched = (Button)findViewById(R.id.btn_watched);
         btn_watched.setOnClickListener(this);
+
+        //btn_add = (Button)findViewById(R.id.btn_add);
+        //btn_add.setOnClickListener(this);
+
     }
 
     @Override
@@ -57,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        // создаем объект для данных
+        ContentValues cv = new ContentValues();
+
         switch (v.getId()) {
             case R.id.btn_about:
                 Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
@@ -74,7 +100,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent_watched = new Intent(MainActivity.this, WhatchedActivity.class);
                 startActivity(intent_watched);
                 break;
+           // case R.id.btn_add:
+            //    Intent intent_add =new Intent(MainActivity.this, AddActivity.class);
+            //    startActivity(intent_add);
 
         }
     }
+
 }

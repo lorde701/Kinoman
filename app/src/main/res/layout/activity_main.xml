@@ -12,6 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom">
+
+        <!--<Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавление"
+            android:id="@+id/btn_add"
+            android:layout_gravity="center_horizontal" />-->
+
         <Button
             android:text="Выбор фильма"
             android:id="@+id/btn_select"
@@ -22,9 +30,10 @@
             android:shadowDy="0"
             android:shadowRadius="15"
             android:layout_gravity="center_horizontal"
-            android:textColor="#4D0A0A"
+            android:textColor="#FFFFFF"
             android:shadowColor="#FFBFCA"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:background="@drawable/main_btn_select"/>
 
         <Button
             android:text="Поиск фильма"
@@ -36,9 +45,10 @@
             android:shadowDy="0"
             android:shadowRadius="15"
             android:layout_gravity="center_horizontal"
-            android:textColor="#4D0A0A"
+            android:textColor="#FFFFFF"
             android:shadowColor="#FFBFCA"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:background="@drawable/main_btn_search"/>
 
         <Button
             android:text="Просмотренные"
@@ -50,9 +60,10 @@
             android:shadowDy="0"
             android:shadowRadius="15"
             android:layout_gravity="center_horizontal"
-            android:textColor="#4D0A0A"
+            android:textColor="#FFFFFF"
             android:shadowColor="#FFBFCA"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:background="@drawable/main_btn_watched"/>
 
         <Button
             android:text="О приложении"
@@ -64,9 +75,10 @@
             android:shadowDy="0"
             android:shadowRadius="15"
             android:layout_gravity="center_horizontal"
-            android:textColor="#4D0A0A"
+            android:textColor="#FFFFFF"
             android:shadowColor="#FFBFCA"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:background="@drawable/main_btn_about"/>
 
     </LinearLayout>
 
