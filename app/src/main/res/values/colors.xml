@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <color name="colorPrimary">#3F51B5</color>
+        <color name="colorPrimaryDark">#303F9F</color>
+        <color name="colorAccent">#FF4081</color>
+
+        <color name="color_background">#665664ba</color>
+        <color name="color_background2">#465664ba</color>
+
+        <color name="line_selected_color">#FFEB61</color>
+        <color name="line_no_selected_color">#7652BA</color>
+
+        <color name="buttons_pressed_color">#524594</color>
+        <color name="buttons_color">#7351B5</color>
+
+        <color name="labels_text_color">#FFD261</color>
+
+
+        <color name="search_background_layout_color">#964488cc</color>
+        <color name="search_text">#fffdfd</color>
+</resources>
