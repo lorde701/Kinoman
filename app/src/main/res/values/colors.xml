@@ -17,5 +17,6 @@
 
 
         <color name="search_background_layout_color">#964488cc</color>
-        <color name="search_text">#fffdfd</color>
+        <color name="search_back_layout_color">#a0ffffff</color>
+        <color name="search_text">#4e000a</color>
 </resources>
