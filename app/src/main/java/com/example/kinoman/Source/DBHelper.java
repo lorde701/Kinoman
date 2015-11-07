@@ -17,38 +17,38 @@ class DBHelper extends SQLiteOpenHelper {
 
     //public static final String ID = "id";
 
-    public static final String TM_ID_MOVIE = "ID_movie";
+    public static final String TM_ID = "id";
     public static final String TABLE_NAME_MOVIE = "movie";
-    public static final String TM_TITLE_MOVIE = "title_movie";
-    public static final String TM_YEAR_RELEASE_MOVIE = "year_release_movie";
-    public static final String TM_GENRE_MOVIE = "genre_movie";
-    public static final String TM_COUNTRY_MOVIE = "country_movie";
-    public static final String TM_DIRECTOR_MOVIE = "director_movie";
-    public static final String TM_ACTORS_MOVIE = "actors_movie";
-    public static final String TM_DESCRIPTION_MOVIE = "description_movie";
-    public static final String TM_ASSESSMENT_MOVIE = "assessment_movie";
-    public static final String TM_IMAGE_MOVIE = "image_movie";
-    public static final String TM_FLAG_MOVIE = "flag_movie";
+    public static final String TM_TITLE = "title_movie";
+    public static final String TM_YEAR_RELEASE = "year_release_movie";
+    public static final String TM_GENRE = "genre_movie";
+    public static final String TM_COUNTRY = "country_movie";
+    public static final String TM_DIRECTOR = "director_movie";
+    public static final String TM_ACTORS = "actors_movie";
+    public static final String TM_DESCRIPTION = "description_movie";
+    public static final String TM_ASSESSMENT = "assessment_movie";
+    public static final String TM_IMAGE = "image_movie";
+    public static final String TM_FLAG = "flag_movie";
 
 
     private static final String CREATE_TABLE_MOVIE = "create table " + TABLE_NAME_MOVIE + " ("
-            + TM_ID_MOVIE + " integer,"
-            + TM_TITLE_MOVIE + " text,"
-            + TM_YEAR_RELEASE_MOVIE + " integer,"
-            + TM_GENRE_MOVIE + " integer,"        //!!!!!!!!!!!!!! int
-            + TM_COUNTRY_MOVIE + " integer,"
-            + TM_DIRECTOR_MOVIE + " integer,"
-            + TM_ACTORS_MOVIE + " integer,"
-            + TM_DESCRIPTION_MOVIE + " text,"
-            + TM_ASSESSMENT_MOVIE + " integer,"
-            + TM_FLAG_MOVIE + " boolean,"
-            + TM_IMAGE_MOVIE + " text);";
+            + TM_ID + " integer,"
+            + TM_TITLE + " text,"
+            + TM_YEAR_RELEASE + " integer,"
+            + TM_GENRE + " integer,"
+            + TM_COUNTRY + " integer,"
+            + TM_DIRECTOR + " integer,"
+            + TM_ACTORS + " integer,"
+            + TM_DESCRIPTION + " text,"
+            + TM_ASSESSMENT + " integer,"
+            + TM_FLAG + " boolean,"
+            + TM_IMAGE + " text);";
 
-    public static final String ID_MOVIE = "ID_movie";
+    public static final String ID_MOVIE = "id";
 
     public static final String TABLE_NAME_GENRE = "table_name_genre";
     public static final String NAME_GENRE = "name_genre";
-    public static final String ID_GENRE = "ID_genre";
+    public static final String ID_GENRE = "id";
 
     private static final String CREATE_TABLE_GENRE = "create table " + TABLE_NAME_GENRE + " ("
             + ID_GENRE + " integer,"
@@ -56,7 +56,7 @@ class DBHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME_LINK_MOVIE_GENRE = "table_name_link_movie_genre";
 
-    //public static final String ID_GENRE = "ID_genre";
+    //public static final String ID_GENRE = "id";
 
     private static final String CREATE_TABLE_LINK_MOVIE_GENRE = "create table " + TABLE_NAME_LINK_MOVIE_GENRE + " ("
             + ID_MOVIE + " integer,"
@@ -64,7 +64,7 @@ class DBHelper extends SQLiteOpenHelper {
 
 
     public static final String TABLE_NAME_LINK_MOVIE_COUNTRY = "table_name_link_movie_country ";
-    public static final String ID_COUNTRY = "ID_country";
+    public static final String ID_COUNTRY = "id";
 
     private static final String CREATE_TABLE_LINK_MOVIE_COUNTRY = "create table " + TABLE_NAME_LINK_MOVIE_COUNTRY + " ("
             + ID_MOVIE + " integer,"
@@ -72,7 +72,7 @@ class DBHelper extends SQLiteOpenHelper {
 
 
     public static final String TABLE_NAME_LINK_MOVIE_ACTORS = "table_name_link_movie_actors ";
-    public static final String ID_ACTORS = "ID_actors";
+    public static final String ID_ACTORS = "id";
 
     private static final String CREATE_TABLE_LINK_MOVIE_ACTORS = "create table " + TABLE_NAME_LINK_MOVIE_ACTORS + " ("
             + ID_MOVIE + " integer,"
@@ -88,7 +88,7 @@ class DBHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME_DIRECTOR = "table_name_director";
     public static final String NAME_DIRECTOR = "name_director";
-    public static final String ID_DIRECTOR = "ID_director";
+    public static final String ID_DIRECTOR = "id";
 
     private static final String CREATE_TABLE_DIRECTOR = "create table " + TABLE_NAME_DIRECTOR + " ("
             + ID_DIRECTOR + " integer,"
@@ -138,26 +138,25 @@ class DBHelper extends SQLiteOpenHelper {
         int[] DIRECTOR = datasForDB.director;
         //int[] ACTORS = datasForDB.actors;
         String[] DESCRIPTION = datasForDB.description;
-        int[] ASSESSMENT = datasForDB.assessment;
+        //int[] ASSESSMENT = datasForDB.assessment;
         String[] IMAGE = datasForDB.img;
-        boolean[] FLAG = datasForDB.flag;
+        //boolean[] FLAG = datasForDB.flag;
 
-        for (int i = 0; i < MOVIES.length; ++i) {
+        /*for (int i = 0; i < MOVIES.length; ++i) {
             cv.clear();
-            cv.put(TM_TITLE_MOVIE, MOVIES[i]);
+            cv.put(TM_TITLE, MOVIES[i]);
             cv.put(ID_MOVIE, ID_MOVIE_FILE[i]);
-            cv.put(TM_YEAR_RELEASE_MOVIE, YEAR[i]);
+            cv.put(TM_YEAR_RELEASE, YEAR[i]);
             //cv.put(GENRE_MOVIE, GENRE[i]);
             //cv.put(COUNTRY_MOVIE, COUNTRY[i]);
-            cv.put(TM_DIRECTOR_MOVIE, DIRECTOR[i]);
+            cv.put(TM_DIRECTOR, DIRECTOR[i]);
             //cv.put(ACTORS_MOVIE, ACTORS[i]);
-            cv.put(TM_DESCRIPTION_MOVIE, DESCRIPTION[i]);
-            cv.put(TM_ASSESSMENT_MOVIE, 0);
-            cv.put(TM_IMAGE_MOVIE, IMAGE[i]);
-            cv.put(TM_FLAG_MOVIE, FLAG[i]);
+            cv.put(TM_DESCRIPTION, DESCRIPTION[i]);
+            cv.put(TM_ASSESSMENT, 0);
+            cv.put(TM_IMAGE, IMAGE[i]);
+            cv.put(TM_FLAG, false);
             db.insert(TABLE_NAME_MOVIE, null, cv);
-
-        }
+        }*/
     }
 
     public void onCreateTableGenre(SQLiteDatabase db) {
@@ -168,12 +167,12 @@ class DBHelper extends SQLiteOpenHelper {
         String[] NAME_GENRE_GENRE = datasForDB.name_genre;
         int[] ID_GENRE_GENRE = datasForDB.id_genre;
 
-        for (int i = 0; i < NAME_GENRE_GENRE.length; ++i) {
+        /*for (int i = 0; i < NAME_GENRE_GENRE.length; ++i) {
             cv.clear();
             cv.put(NAME_GENRE, NAME_GENRE_GENRE[i]);
             cv.put(ID_GENRE, ID_GENRE_GENRE[i]);
             db.insert(TABLE_NAME_GENRE, null, cv);
-        }
+        }*/
 
     }
 
@@ -185,12 +184,12 @@ class DBHelper extends SQLiteOpenHelper {
         String[] NAME_COUNTRY_COUNTRY = datasForDB.name_country;
         int[] ID_COUNTRY_COUNTRY = datasForDB.id_country;
 
-        for (int i = 0; i < NAME_COUNTRY_COUNTRY.length; i++) {
+        /*for (int i = 0; i < NAME_COUNTRY_COUNTRY.length; i++) {
             cv.clear();
             cv.put(NAME_COUNTRY, NAME_COUNTRY_COUNTRY[i]);
             cv.put(ID_COUNTRY, ID_COUNTRY_COUNTRY[i]);
             db.insert(TABLE_NAME_COUNTRY, null, cv);
-        }
+        }*/
     }
 
     public void onCreateTableDirector(SQLiteDatabase db) {
@@ -201,12 +200,12 @@ class DBHelper extends SQLiteOpenHelper {
         String[] NAME_DIRECTOR_DIRECTOR = datasForDB.name_director;
         int[] ID_DIRECTOR_DIRECTOR = datasForDB.id_director;
 
-        for (int i = 0; i < NAME_DIRECTOR_DIRECTOR.length; i++) {
+        /*for (int i = 0; i < NAME_DIRECTOR_DIRECTOR.length; i++) {
             cv.clear();
             cv.put(NAME_DIRECTOR, NAME_DIRECTOR_DIRECTOR[i]);
             cv.put(ID_DIRECTOR, ID_DIRECTOR_DIRECTOR[i]);
             db.insert(TABLE_NAME_DIRECTOR, null, cv);
-        }
+        }*/
     }
 
     public void onCreateTableActor(SQLiteDatabase db) {
@@ -217,12 +216,12 @@ class DBHelper extends SQLiteOpenHelper {
         String[] NAME_ACTOR_ACTOR = datasForDB.name_actor;
         int[] ID_ACTOR_ACTOR = datasForDB.id_actor;
 
-        for (int i = 0; i < NAME_ACTOR_ACTOR.length; i++) {
+       /* for (int i = 0; i < NAME_ACTOR_ACTOR.length; i++) {
             cv.clear();
             cv.put(NAME_ACTORS, NAME_ACTOR_ACTOR[i]);
             cv.put(ID_ACTORS, ID_ACTOR_ACTOR[i]);
             db.insert(TABLE_NAME_ACTORS, null, cv);
-        }
+        }*/
     }
 
 
@@ -234,12 +233,12 @@ class DBHelper extends SQLiteOpenHelper {
         int[] GENRE_ID_MOVIE = datasForDB.genre_id_movie;
         int[] GENRE_ID_GENRE = datasForDB.genre_id_genre;
 
-        for (int i = 0; i < GENRE_ID_GENRE.length; i++) {
+        /*for (int i = 0; i < GENRE_ID_GENRE.length; i++) {
             cv.clear();
             cv.put(ID_GENRE, GENRE_ID_GENRE[i]);
             cv.put(ID_MOVIE, GENRE_ID_MOVIE[i]);
             db.insert(TABLE_NAME_LINK_MOVIE_GENRE, null, cv);
-        }
+        }*/
     }
 
     public void onCreateTableLinkMovieCountry(SQLiteDatabase db) {
@@ -251,12 +250,12 @@ class DBHelper extends SQLiteOpenHelper {
         int[] COUNTRY_ID_MOVIE = datasForDB.country_id_movie;
         int[] COUNTRY_ID_COUNTRY = datasForDB.country_id_country;
 
-        for (int i = 0; i < COUNTRY_ID_COUNTRY.length; i++) {
+        /*for (int i = 0; i < COUNTRY_ID_COUNTRY.length; i++) {
             cv.clear();
             cv.put(ID_COUNTRY, COUNTRY_ID_COUNTRY[i]);
             cv.put(ID_MOVIE, COUNTRY_ID_MOVIE[i]);
             db.insert(CREATE_TABLE_LINK_MOVIE_COUNTRY, null, cv);
-        }
+        }*/
 
     }
 
@@ -268,13 +267,12 @@ class DBHelper extends SQLiteOpenHelper {
         int[] ACTOR_ID_MOVIE = datasForDB.actor_id_movie;
         int[] ACTOR_ID_ACTOR = datasForDB.actor_id_actor;
 
-        for (int i = 0; i < ACTOR_ID_ACTOR.length; i++) {
+        /*for (int i = 0; i < ACTOR_ID_ACTOR.length; i++) {
             cv.clear();
             cv.put(ID_MOVIE, ACTOR_ID_MOVIE[i]);
             cv.put(ID_MOVIE, ACTOR_ID_ACTOR[i]);
             db.insert(CREATE_TABLE_LINK_MOVIE_ACTORS, null, cv);
-
-        }
+        }*/
     }
 
     @Override

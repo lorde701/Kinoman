@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_watched = (Button)findViewById(R.id.btn_watched);
         btn_watched.setOnClickListener(this);
 
-        //btn_add = (Button)findViewById(R.id.btn_add);
-        //btn_add.setOnClickListener(this);
+        btn_add = (Button)findViewById(R.id.btn_add);
+        btn_add.setOnClickListener(this);
 
     }
 
@@ -100,9 +100,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent_watched = new Intent(MainActivity.this, WhatchedActivity.class);
                 startActivity(intent_watched);
                 break;
-           // case R.id.btn_add:
-            //    Intent intent_add =new Intent(MainActivity.this, AddActivity.class);
-            //    startActivity(intent_add);
+            case R.id.btn_add:
+                Intent intent_add =new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent_add);
 
         }
     }

@@ -35,7 +35,7 @@ public class DatasForDB {
             "странные безделушки — дают единственный шанс пролить свет на судьбу исчезнувшей. Вот только не придется ли «охотнику» " +
             "в процессе поиска раскрыть миру и пару-тройку собственных малосимпатичных тайн?"};
     public int[] assessment = {};
-    public boolean[] flag ={false};
+    //public boolean[] flag ={false};
     public String[] img = {"movie_img_pride_prejudice", "movie_img_kill_mockingbird"};
 
     public String[] name_genre = {"Драма", "Комедия", "Детектив", "Триллер", "Мелодрама", "Криминал"};

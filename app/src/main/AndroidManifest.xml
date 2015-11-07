@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kinoman" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,6 +37,10 @@
         <activity
             android:name=".AddActivity"
             android:label="@string/title_activity_add" >
+        </activity>
+        <activity
+            android:name=".AboutMovieActivity"
+            android:label="@string/title_activity_about_movie" >
         </activity>
     </application>
 

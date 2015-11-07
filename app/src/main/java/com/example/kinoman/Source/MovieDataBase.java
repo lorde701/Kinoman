@@ -53,19 +53,20 @@ public class MovieDataBase {
 
         logCursor(c);
 
-        int ColIndexMovie = c.getColumnIndex(dbh.TM_ID_MOVIE);
-        int ColIndexTitle = c.getColumnIndex(dbh.TM_TITLE_MOVIE);
-        int ColIndexYear = c.getColumnIndex(dbh.TM_YEAR_RELEASE_MOVIE);
+        int ColIndexMovieID = c.getColumnIndex(dbh.TM_ID);
+        int ColIndexTitle = c.getColumnIndex(dbh.TM_TITLE);
+        int ColIndexYear = c.getColumnIndex(dbh.TM_YEAR_RELEASE);
+        int ColIndexGenre = c.getColumnIndex(dbh.TM_GENRE);
 
 
-        int intIdColIndex = c.getColumnIndex(dbh.INT_ID_COLUMN_TNSO);
-        int imgColIndex = c.getColumnIndex(dbh.IMG_COLUMN_TNSO);
+       // int intIdColIndex = c.getColumnIndex(dbh.INT_ID_COLUMN_TNSO);
+        //int imgColIndex = c.getColumnIndex(dbh.IMG_COLUMN_TNSO);
 
 
         if(c.moveToFirst()) {
             do {
-                Movie temp = new Movie(c.getString());
-                list.add(temp);
+              //  Movie temp = new Movie(c.getString(ColIndexMovieID), c.getString());
+              //  list.add(temp);
             }
             while (c.moveToNext());
         }
