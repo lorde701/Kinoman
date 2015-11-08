@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_select:
                 Intent intent_select = new Intent(MainActivity.this, SelectActivity.class);
                 startActivity(intent_select);
+
                 break;
             case R.id.btn_watched:
                 Intent intent_watched = new Intent(MainActivity.this, WhatchedActivity.class);

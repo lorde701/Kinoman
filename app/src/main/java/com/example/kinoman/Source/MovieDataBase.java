@@ -9,10 +9,12 @@ import android.graphics.Movie;
 import android.util.Log;
 
 import com.example.kinoman.ClFrDwn.FilmObjectForDownload;
+import com.example.kinoman.SelectActivity;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by ivanka on 02.11.15.
@@ -24,6 +26,9 @@ public class MovieDataBase {
     private final Context context;
     private DBHelper dbh;
     private SQLiteDatabase db;
+    int rand_num;
+
+    //int count_movies;
 
     public MovieDataBase(Context context) {
 
@@ -73,6 +78,7 @@ public class MovieDataBase {
             addLinkMovieGenre(id_movie, film.getGanres());
             addLinkMovieCountry(id_movie, film.getCountries());
             addLinkMovieActor(id_movie, film.getActors());
+            //count_movies = id_movie;
         }
 
         close();
@@ -119,6 +125,98 @@ public class MovieDataBase {
 
         close();
     }
+
+    public String selectTitleMovie() {
+        open();
+        String str = "";
+        Cursor c;
+
+        String selectCount = "select count(*) from " + dbh.TABLE_NAME_MOVIE + ";";
+        c = db.rawQuery(selectCount, new String[]{});
+
+        logCursor(c);
+        c.moveToFirst();
+        int count = c.getInt(c.getColumnIndex("count(*)"));
+
+        Random rand = new Random();
+        rand_num = rand.nextInt(count - 1) + 1;
+
+        String select = dbh.TM_ID + " = \"" + rand_num + "\"";
+        c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
+
+        if(c.moveToFirst()) {
+            int id = c.getColumnIndex(dbh.TM_TITLE);
+            str = c.getString(id);
+        }
+        close();
+        return str;
+    }
+
+    public String selectInfoMovie(String col) {
+        open();
+        String str = "";
+        Cursor c;
+
+        String select = dbh.TM_ID + " = \"" + rand_num + "\"";
+        c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
+
+        if(c.moveToFirst()) {
+            int id = c.getColumnIndex(col);
+            str = c.getString(id);
+        }
+        close();
+        return str;
+    }
+
+    public  String selectYear() {
+        String str = selectInfoMovie(dbh.TM_YEAR_RELEASE);
+        return str;
+    }
+
+    public String selectDescription() {
+        String str = selectInfoMovie(dbh.TM_DESCRIPTION);
+        return str;
+    }
+
+    public String selectGenre() {
+        open();
+        String str = "";
+        Cursor c;
+
+        String whatSelect = dbh.TLMG_ID_MOVIE + " = \"" + rand_num + "\"";
+
+        String selectCount = "select count(*) from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + whatSelect + ";";
+        c = db.rawQuery(selectCount, new String[]{});
+
+        logCursor(c);
+        c.moveToFirst();
+        int count = c.getInt(c.getColumnIndex("count(*)"));
+
+        for(int i = 0; i < count; i++) {
+
+        }
+
+        close();
+
+        return str;
+    }
+
+    public String selectDirector() {
+        String str ="";
+        Cursor c;
+        open();
+
+        String whatSelect = dbh.TD_ID_DIRECTOR + " = \"" + rand_num + "\"";
+
+        c = db.query(dbh.TABLE_NAME_DIRECTOR, null, whatSelect, null, null, null, null);
+        if(c.moveToFirst()) {
+            int id = c.getColumnIndex(dbh.TD_NAME_DIRECTOR);
+            str = c.getString(id);
+        }
+        close();
+        return str;
+    }
+
 
     private int addDirector(String name_director) {
         int id;

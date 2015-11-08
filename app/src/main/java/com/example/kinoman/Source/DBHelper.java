@@ -9,7 +9,7 @@ import android.util.Log;
 /**
  * Created by ivanka on 01.11.15.
  */
-class DBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     static final String DB_NAME = "myDB";
     static final int VERSION = 1;
 
@@ -26,10 +26,11 @@ class DBHelper extends SQLiteOpenHelper {
     public static final String TM_ASSESSMENT = "assessment_movie";
     public static final String TM_IMAGE = "image_movie";
     public static final String TM_FLAG = "flag_movie";
+    public static final String TM_ID = "_id";
 
 
     private static final String CREATE_TABLE_MOVIE = "create table " + TABLE_NAME_MOVIE + " ("
-            + "_id integer primary key autoincrement,"
+            + TM_ID + "integer primary key autoincrement,"
             + TM_TITLE + " text,"
             + TM_YEAR_RELEASE + " text,"
            // + TM_GENRE + " integer,"
