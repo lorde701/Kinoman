@@ -4,13 +4,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class SearchActivity extends AppCompatActivity {
+
+    Button search_btn_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        search_btn_search = (Button)findViewById(R.id.search_btn_search);
+
     }
 
     @Override
