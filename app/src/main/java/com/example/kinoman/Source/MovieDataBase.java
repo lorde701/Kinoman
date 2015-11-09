@@ -4,15 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Movie;
 import android.util.Log;
 
 import com.example.kinoman.ClFrDwn.FilmObjectForDownload;
-import com.example.kinoman.SelectActivity;
 
-import java.lang.ref.SoftReference;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,7 +21,7 @@ public class MovieDataBase {
     private final Context context;
     private DBHelper dbh;
     private SQLiteDatabase db;
-    int rand_num;
+    //int rand_num;
 
     //int count_movies;
 
@@ -71,7 +66,7 @@ public class MovieDataBase {
             //cv.put(dbh.TM_DIRECTOR, film.getDirector());
             cv.put(dbh.TM_DESCRIPTION, film.getDescription());
             cv.put(dbh.TM_ASSESSMENT, 11);
-            cv.put(dbh.TM_FLAG, false);
+            cv.put(dbh.TM_FLAG, 0);
             cv.put(dbh.TM_IMAGE, MT_img[i]);
             cv.put(dbh.TM_DIRECTOR, addDirector(film.getDirector()));
             id_movie = (int)db.insert(dbh.TABLE_NAME_MOVIE, null, cv);
@@ -129,9 +124,8 @@ public class MovieDataBase {
         close();
     }
 
-    public String selectTitleMovie() {
+    public int selectIdMovie() {
         open();
-        String str = "";
         Cursor c;
 
         String selectCount = "select count(*) from " + dbh.TABLE_NAME_MOVIE + ";";
@@ -142,46 +136,41 @@ public class MovieDataBase {
         int count = c.getInt(c.getColumnIndex("count(*)"));
 
         Random rand = new Random();
-        rand_num = rand.nextInt(count - 1) + 1;
+        int rand_num = rand.nextInt(count - 1) + 1;
+
+        close();
+        return rand_num;
+    }
+
+    public Movie selectInfoMovie(int rand_num ) {
+        Movie movie = new Movie();
+        open();
+        Cursor c;
+
+        movie.setM_Id(rand_num);
 
         String select = dbh.TM_ID + " = \"" + rand_num + "\"";
         c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
 
         if(c.moveToFirst()) {
             int id = c.getColumnIndex(dbh.TM_TITLE);
-            str = c.getString(id);
+             movie.setM_title(c.getString(id));
+            id = c.getColumnIndex(dbh.TM_YEAR_RELEASE);
+            movie.setM_year(c.getString(id));
+            id = c.getColumnIndex(dbh.TM_DESCRIPTION);
+            movie.setM_description(c.getString(id));
+            id = c.getColumnIndex(dbh.TM_ASSESSMENT);
+            movie.setM_assessment(c.getInt(id));
+            id = c.getColumnIndex(dbh.TM_IMAGE);
+            movie.setM_img(c.getString(id));
+            id = c.getColumnIndex(dbh.TM_FLAG);
+            movie.setM_flag(c.getInt(id));
         }
         close();
-        return str;
+        return movie;
     }
 
-    public String selectInfoMovie(String col) {
-        open();
-        String str = "";
-        Cursor c;
-
-        String select = dbh.TM_ID + " = \"" + rand_num + "\"";
-        c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
-
-        if(c.moveToFirst()) {
-            int id = c.getColumnIndex(col);
-            str = c.getString(id);
-        }
-        close();
-        return str;
-    }
-
-    public  String selectYear() {
-        String str = selectInfoMovie(dbh.TM_YEAR_RELEASE);
-        return str;
-    }
-
-    public String selectDescription() {
-        String str = selectInfoMovie(dbh.TM_DESCRIPTION);
-        return str;
-    }
-
-    public String selectGenre() {
+    public String selectGenre(int rand_num ) {
         open();
         String str = "";
         Cursor c;
@@ -224,7 +213,7 @@ public class MovieDataBase {
         return str;
     }
 
-    public String selectCountry() {
+    public String selectCountry( int rand_num ) {
         open();
         String str = "";
         Cursor c;
@@ -265,7 +254,7 @@ public class MovieDataBase {
         return str;
     }
 
-    public String selectActors() {
+    public String selectActors( int rand_num ) {
         open();
         String str = "";
         Cursor c;
@@ -306,7 +295,7 @@ public class MovieDataBase {
         return str;
     }
 
-    public String selectDirector() {
+    public String selectDirector( int rand_num ) {
         String str ="";
         Cursor c;
         open();
@@ -320,6 +309,26 @@ public class MovieDataBase {
         }
         close();
         return str;
+    }
+
+    public Movie selectRandMovie() {
+        Movie movie;
+        movie = new Movie();
+        int idMovie = selectIdMovie();
+
+        movie = selectInfoMovie(idMovie);
+        movie.setM_genre(selectGenre(idMovie));
+        movie.setM_countries(selectCountry(idMovie));
+        movie.setM_director(selectDirector(idMovie));
+        movie.setM_actors(selectActors(idMovie));
+
+        //movie.setM_Id(idMovie);
+        //movie.setM_title(selectTitleMovie(idMovie));
+        //movie.setM_title(selectInfoMovie(dbh.TM_TITLE, idMovie));
+        //movie.setM_year(selectInfoMovie(dbh.TM_YEAR_RELEASE, idMovie));
+        //movie.setM_description(selectInfoMovie(dbh.TM_DESCRIPTION, idMovie));
+
+        return movie;
     }
 
 
@@ -374,6 +383,7 @@ public class MovieDataBase {
             db.insert(dbh.TABLE_NAME_LINK_MOVIE_GENRE, null, cv);
         }
     }
+
 
     private int addCountry(String name_country) {
         int id;
@@ -459,3 +469,29 @@ public class MovieDataBase {
     }
 
 }
+
+ /*   public String selectTitleMovie(int rand_num) {
+    open();
+    String str = "";
+    Cursor c;
+
+    String select = dbh.TM_ID + " = \"" + rand_num + "\"";
+    c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
+
+    if(c.moveToFirst()) {
+        int id = c.getColumnIndex(dbh.TM_TITLE);
+        str = c.getString(id);
+    }
+    close();
+    return str;
+}
+    public  String selectYear() {
+    String str = selectInfoMovie(dbh.TM_YEAR_RELEASE);
+    return str;
+}
+
+    public String selectDescription() {
+        String str = selectInfoMovie(dbh.TM_DESCRIPTION);
+        return str;
+    }
+     */

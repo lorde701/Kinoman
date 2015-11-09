@@ -142,6 +142,22 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:layout_height="33dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/txt_a" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="64dp">
 
                 <Button
@@ -152,6 +168,9 @@
                     android:id="@+id/btn_other" />
             </LinearLayout>
 
+
+
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

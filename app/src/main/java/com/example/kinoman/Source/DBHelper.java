@@ -39,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
            // + TM_ACTORS + " integer,"
             + TM_DESCRIPTION + " text,"
             + TM_ASSESSMENT + " integer,"
-            + TM_FLAG + " boolean,"
+            + TM_FLAG + " integer,"
             + TM_IMAGE + " text);";
 
    // public static final String ID_MOVIE = "id";

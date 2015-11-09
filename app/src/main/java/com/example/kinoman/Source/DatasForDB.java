@@ -17,9 +17,8 @@ public class DatasForDB {
             "3",
             "4",
             "6",
-
-
             "1"
     };
+        public int TM_flag = 0;
 
 }
