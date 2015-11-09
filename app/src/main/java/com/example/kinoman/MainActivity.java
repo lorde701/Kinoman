@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_add = (Button)findViewById(R.id.btn_add);
         btn_add.setOnClickListener(this);
 
+
     }
 
     @Override
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         // создаем объект для данных
-        ContentValues cv = new ContentValues();
+        //ContentValues cv = new ContentValues();
 
         switch (v.getId()) {
             case R.id.btn_about:

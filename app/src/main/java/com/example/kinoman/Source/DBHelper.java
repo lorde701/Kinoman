@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final String CREATE_TABLE_MOVIE = "create table " + TABLE_NAME_MOVIE + " ("
-            + TM_ID + "integer primary key autoincrement,"
+            + TM_ID + " integer primary key autoincrement,"
             + TM_TITLE + " text,"
             + TM_YEAR_RELEASE + " text,"
            // + TM_GENRE + " integer,"

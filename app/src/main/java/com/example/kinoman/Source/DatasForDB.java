@@ -13,7 +13,7 @@ public class DatasForDB {
             "567",
             "678",
             "789",
-            "2",
+            "posledniy_ohotn_na_vedm_8",
             "3",
             "4",
             "6",

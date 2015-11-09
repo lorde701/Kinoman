@@ -107,21 +107,24 @@ public class MovieDataBase {
         /*c = db.query(dbh.TABLE_NAME_DIRECTOR, null, null, null, null, null, null);
         logCursor(c);
 
-        c = db.query(dbh.TABLE_NAME_GENRE, null, null, null, null, null, null);
-        logCursor(c);
 
-        c = db.query(dbh.TABLE_NAME_LINK_MOVIE_GENRE, null, null, null, null, null, null);
-        logCursor(c);
+
+
 
         c = db.query(dbh.TABLE_NAME_LINK_MOVIE_COUNTRY, null, null, null, null, null, null);
-        logCursor(c);*/
+        logCursor(c);
 
         c = db.query(dbh.TABLE_NAME_ACTORS, null, null, null, null, null, null);
         logCursor(c);
 
         c = db.query(dbh.TABLE_NAME_LINK_MOVIE_ACTORS, null, null, null, null, null, null);
+        logCursor(c);*/
+
+        c = db.query(dbh.TABLE_NAME_GENRE, null, null, null, null, null, null);
         logCursor(c);
 
+        c = db.query(dbh.TABLE_NAME_LINK_MOVIE_GENRE, null, null, null, null, null, null);
+        logCursor(c);
 
         close();
     }
@@ -182,22 +185,124 @@ public class MovieDataBase {
         open();
         String str = "";
         Cursor c;
+        Cursor cursor;
 
         String whatSelect = dbh.TLMG_ID_MOVIE + " = \"" + rand_num + "\"";
 
-        String selectCount = "select count(*) from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + whatSelect + ";";
+        String selectCount = "select * from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + whatSelect + ";";
         c = db.rawQuery(selectCount, new String[]{});
+        Log.d("workWithDataDase", "cursor c: " + c);
+
 
         logCursor(c);
+        Log.d("workWithDataDase", "log: " + c.moveToFirst());
         c.moveToFirst();
-        int count = c.getInt(c.getColumnIndex("count(*)"));
+        Boolean flag = false;
 
-        for(int i = 0; i < count; i++) {
+        do {
+            int count = c.getInt(c.getColumnIndex(dbh.TLMG_ID_GENRE));
+            Log.d("workWithDataDase", "ID жанра: " + count);
 
-        }
+            String whatSelect2 = dbh.TG_ID_GENRE + " = \"" + count + "\"";
+            cursor = db.query(dbh.TABLE_NAME_GENRE, null, whatSelect2, null, null, null, null);
+            //Log.d("workWithDataDase", "Название: " + cursor);
 
+            if (cursor.moveToFirst()) {
+                int idG = cursor.getColumnIndex(dbh.TG_NAME_GENRE);
+                if (flag) {
+                    str = str + ", " + cursor.getString(idG);
+                } else {
+                    str = cursor.getString(idG);
+                    flag = true;
+                }
+
+                Log.d("workWithDataDase", "Название: " + idG);
+            }
+        } while (c.moveToNext());
         close();
 
+        return str;
+    }
+
+    public String selectCountry() {
+        open();
+        String str = "";
+        Cursor c;
+        Cursor cursor;
+
+        String whatSelect = dbh.TLMC_ID_MOVIE + " = \"" + rand_num + "\"";
+
+        String selectCount = "select * from " + dbh.TABLE_NAME_LINK_MOVIE_COUNTRY + " where " + whatSelect + ";";
+        c = db.rawQuery(selectCount, new String[]{});
+        Log.d("workWithDataDase", "cursor c: " + c);
+
+        logCursor(c);
+        Log.d("workWithDataDase", "log: " + c.moveToFirst());
+        c.moveToFirst();
+        Boolean flag = false;
+
+        do {
+            int count = c.getInt(c.getColumnIndex(dbh.TLMC_ID_COUNTRY));
+            Log.d("workWithDataDase", "ID жанра: " + count);
+
+            String whatSelect2 = dbh.TC_ID_COUNTRY + " = \"" + count + "\"";
+            cursor = db.query(dbh.TABLE_NAME_COUNTRY, null, whatSelect2, null, null, null, null);
+            //Log.d("workWithDataDase", "Название: " + cursor);
+
+            if (cursor.moveToFirst()) {
+                int idG = cursor.getColumnIndex(dbh.TC_NAME_COUNTRY);
+                if (flag) {
+                    str = str + ", " + cursor.getString(idG);
+                } else {
+                    str = cursor.getString(idG);
+                    flag = true;
+                }
+
+                Log.d("workWithDataDase", "Название: " + idG);
+            }
+        } while (c.moveToNext());
+        close();
+        return str;
+    }
+
+    public String selectActors() {
+        open();
+        String str = "";
+        Cursor c;
+        Cursor cursor;
+
+        String whatSelect = dbh.TLMA_ID_MOVIE + " = \"" + rand_num + "\"";
+
+        String selectCount = "select * from " + dbh.TABLE_NAME_LINK_MOVIE_ACTORS + " where " + whatSelect + ";";
+        c = db.rawQuery(selectCount, new String[]{});
+        Log.d("workWithDataDase", "cursor c: " + c);
+
+        logCursor(c);
+        Log.d("workWithDataDase", "log: " + c.moveToFirst());
+        c.moveToFirst();
+        Boolean flag = false;
+
+        do {
+            int count = c.getInt(c.getColumnIndex(dbh.TLMA_ID_ACTOR));
+            Log.d("workWithDataDase", "ID жанра: " + count);
+
+            String whatSelect2 = dbh.TA_ID_ACTORS + " = \"" + count + "\"";
+            cursor = db.query(dbh.TABLE_NAME_ACTORS, null, whatSelect2, null, null, null, null);
+            //Log.d("workWithDataDase", "Название: " + cursor);
+
+            if (cursor.moveToFirst()) {
+                int idG = cursor.getColumnIndex(dbh.TA_NAME_ACTORS);
+                if (flag) {
+                    str = str + ", " + cursor.getString(idG);
+                } else {
+                    str = cursor.getString(idG);
+                    flag = true;
+                }
+
+                Log.d("workWithDataDase", "Название: " + idG);
+            }
+        } while (c.moveToNext());
+        close();
         return str;
     }
 
