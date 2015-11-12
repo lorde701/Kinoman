@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.kinoman.ClFrDwn.FilmObjectForDownload;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -101,9 +102,6 @@ public class MovieDataBase {
 
         /*c = db.query(dbh.TABLE_NAME_DIRECTOR, null, null, null, null, null, null);
         logCursor(c);
-
-
-
 
 
         c = db.query(dbh.TABLE_NAME_LINK_MOVIE_COUNTRY, null, null, null, null, null, null);
@@ -322,12 +320,6 @@ public class MovieDataBase {
         movie.setM_director(selectDirector(idMovie));
         movie.setM_actors(selectActors(idMovie));
 
-        //movie.setM_Id(idMovie);
-        //movie.setM_title(selectTitleMovie(idMovie));
-        //movie.setM_title(selectInfoMovie(dbh.TM_TITLE, idMovie));
-        //movie.setM_year(selectInfoMovie(dbh.TM_YEAR_RELEASE, idMovie));
-        //movie.setM_description(selectInfoMovie(dbh.TM_DESCRIPTION, idMovie));
-
         return movie;
     }
 
@@ -383,7 +375,6 @@ public class MovieDataBase {
             db.insert(dbh.TABLE_NAME_LINK_MOVIE_GENRE, null, cv);
         }
     }
-
 
     private int addCountry(String name_country) {
         int id;
@@ -468,30 +459,32 @@ public class MovieDataBase {
             Log.d(LOG_TAG_DB, "Cursor is null");
     }
 
-}
 
- /*   public String selectTitleMovie(int rand_num) {
-    open();
-    String str = "";
-    Cursor c;
+    public List<MovieForSearch> getListMovie(String search) {
+        List<MovieForSearch> list = new ArrayList<>();
 
-    String select = dbh.TM_ID + " = \"" + rand_num + "\"";
-    c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
+        Cursor c;
 
-    if(c.moveToFirst()) {
-        int id = c.getColumnIndex(dbh.TM_TITLE);
-        str = c.getString(id);
+        String select = "select from " + dbh.TABLE_NAME_MOVIE + "(" + dbh.TM_TITLE + ", " + dbh.TM_ID + ", " + dbh.TM_IMAGE + ", " + dbh.TM_ASSESSMENT + ") where " + dbh.TM_TITLE + " = ?";
+        c = db.rawQuery(select, new String[] { search });
+        //c = db.query(dbh.TABLE_NAME_MOVIE, new String[] {dbh.TM_ID, dbh.TM_TITLE, dbh.TM_IMAGE, dbh.TM_ASSESSMENT}, dbh.TM_TITLE + " = ?", new String[] {"LIKE %" + search + "%", null, null})
+
+        logCursor(c);
+
+        int index_id = c.getColumnIndex(dbh.TM_ID);
+        int index_title = c.getColumnIndex(dbh.TM_TITLE);
+        int index_img = c.getColumnIndex(dbh.TM_IMAGE);
+        int index_assessment = c.getColumnIndex(dbh.TM_ASSESSMENT);
+
+        if(c.moveToFirst()) {
+            do {
+                MovieForSearch temp = new MovieForSearch(c.getInt(index_id), c.getString(index_title), c.getString(index_img), c.getInt(index_assessment));
+                list.add(temp);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        this.close();
+        return list;
     }
-    close();
-    return str;
 }
-    public  String selectYear() {
-    String str = selectInfoMovie(dbh.TM_YEAR_RELEASE);
-    return str;
-}
-
-    public String selectDescription() {
-        String str = selectInfoMovie(dbh.TM_DESCRIPTION);
-        return str;
-    }
-     */

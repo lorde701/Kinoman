@@ -10,4 +10,6 @@
     <string name="title_activity_add">Добавить</string>
     <string name="Add">New Button</string>
     <string name="title_activity_about_movie">AboutMovieActivity</string>
+    <string name="title_activity_search_movie_">Search_movie_Activity</string>
+    <string name="title_activity_search_movies">SearchMoviesActivity</string>
 </resources>

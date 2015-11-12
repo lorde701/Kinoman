@@ -65,6 +65,42 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    protected void otherMovie() {
+        //super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select);
+        MovieDataBase mdb = new MovieDataBase(this);
+
+
+        Movie mov = mdb.selectRandMovie();
+
+        txt_title_movie = (TextView)findViewById(R.id.txt_title_movie);
+        txt_title_movie.setText(mov.getM_title());
+
+        txt_year = (TextView)findViewById(R.id.txt_year);
+        txt_year.setText("Год выпуска: " + mov.getM_year());
+
+        txt_genre = (TextView)findViewById(R.id.txt_genre);
+        txt_genre.setText("Жанр: " + mov.getM_genre());
+
+        txt_director = (TextView)findViewById(R.id.txt_director);
+        txt_director.setText("Режиссер: " + mov.getM_director());
+
+        txt_description = (TextView)findViewById(R.id.txt_description);
+        txt_description.setText("Описание: " + mov.getM_description());
+
+        txt_countries = (TextView)findViewById(R.id.txt_country);
+        txt_countries.setText("Страна: " + mov.getM_countries());
+
+        txt_actors = (TextView)findViewById(R.id.txt_actors);
+        txt_actors.setText("Актеры: " + mov.getM_actors());
+
+        txt_assessment = (TextView)findViewById(R.id.txt_assessment);
+        txt_assessment.setText("Оценка: " + mov.getM_assessment());
+
+        btn_other = (Button)findViewById(R.id.btn_other);
+        btn_other.setOnClickListener(this);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -92,8 +128,9 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
 
             case R.id.btn_other:
-                Intent intent_select = new Intent(SelectActivity.this, SelectActivity.class);
-                startActivity(intent_select);
+                otherMovie();
+                //Intent intent_select = new Intent(SelectActivity.this, SelectActivity.class);
+                //startActivity(intent_select);
                 break;
         }
     }

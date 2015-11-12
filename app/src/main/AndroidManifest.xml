@@ -42,6 +42,14 @@
             android:name=".AboutMovieActivity"
             android:label="@string/title_activity_about_movie" >
         </activity>
+        <activity
+            android:name=".Source.Search_movie_Activity"
+            android:label="@string/title_activity_search_movie_" >
+        </activity>
+        <activity
+            android:name=".SearchMoviesActivity"
+            android:label="@string/title_activity_search_movies" >
+        </activity>
     </application>
 
 </manifest>

@@ -5,29 +5,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
+import com.example.kinoman.Source.MovieDataBase;
 
-    Button search_btn_search;
-    EditText search_txt;
+public class SearchMoviesActivity extends AppCompatActivity {
+
+    private MovieDataBase dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_search_movies);
 
-        search_btn_search = (Button)findViewById(R.id.search_btn_search);
-        search_txt = (EditText)findViewById(R.id.search_txt);
-        search_btn_search.setOnClickListener(this);
+        dataBase = new MovieDataBase(this);
+
+        Intent intent = getIntent();
+        String nameMovie = intent.getStringExtra("titleMovie");
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.menu_search_movies, menu);
         return true;
     }
 
@@ -44,16 +44,5 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_about:
-                Intent intent = new Intent(this, SearchMoviesActivity.class);
-                intent.putExtra("titleMovie", search_txt.getText().toString());
-                startActivity(intent);
-                break;
-        }
     }
 }
