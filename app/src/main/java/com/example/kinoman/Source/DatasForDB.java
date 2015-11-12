@@ -6,19 +6,19 @@ package com.example.kinoman.Source;
 
 public class DatasForDB {
     public String[] TM_img = {
-            "123",
-            "234",
-            "345",
-            "456",
-            "567",
-            "678",
-            "789",
-            "posledniy_ohotn_na_vedm_8",
-            "3",
-            "4",
-            "6",
-            "1"
+            "a1",
+            "a2",
+            "a3",
+            "a4",
+            "a5",
+            "a6",
+            "a7",
+            "a8",
+            "a9",
+            "a10",
+            "a11",
+            "a12"
     };
-        public int TM_flag = 0;
+        //public int TM_flag = 0;
 
 }

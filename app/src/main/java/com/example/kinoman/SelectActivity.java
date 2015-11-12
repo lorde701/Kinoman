@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kinoman.Source.Movie;
@@ -23,6 +24,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     TextView txt_actors;
     TextView txt_description;
     TextView txt_assessment;
+    ImageView img;
     Button btn_other;
 
     @Override
@@ -61,7 +63,9 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         btn_other = (Button)findViewById(R.id.btn_other);
         btn_other.setOnClickListener(this);
 
-
+        int idImg = SelectActivity.this.getResources().getIdentifier(mov.getM_img(), "drawable", getPackageName());
+        img = (ImageView)findViewById(R.id.img);
+        img.setImageDrawable(getResources().getDrawable(idImg));
 
     }
 
@@ -99,6 +103,10 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
         btn_other = (Button)findViewById(R.id.btn_other);
         btn_other.setOnClickListener(this);
+
+        int idImg = SelectActivity.this.getResources().getIdentifier(mov.getM_img(), "drawable", getPackageName());
+        img = (ImageView)findViewById(R.id.img);
+        img.setImageDrawable(getResources().getDrawable(idImg));
     }
 
     @Override

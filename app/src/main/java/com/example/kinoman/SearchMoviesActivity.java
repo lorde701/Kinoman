@@ -1,12 +1,24 @@
 package com.example.kinoman;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.kinoman.Source.MovieDataBase;
+import com.example.kinoman.Source.MovieForSearch;
+
+import java.util.List;
 
 public class SearchMoviesActivity extends AppCompatActivity {
 
@@ -22,27 +34,45 @@ public class SearchMoviesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nameMovie = intent.getStringExtra("titleMovie");
 
-    }
+        List<MovieForSearch> list = dataBase.getListMovie(nameMovie);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_movies, menu);
-        return true;
-    }
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
+        LayoutInflater inflater = this.getLayoutInflater();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (list.isEmpty()) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Оп-па-па")
+                    .setMessage("Фильма с таким названием в базе данных нет")
+                            //.setIcon(R.drawable.ic_android_cat)
+                    .setCancelable(false)
+                    .setNegativeButton("Ок",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    finish();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
-        return super.onOptionsItemSelected(item);
+        for (MovieForSearch movieForSearch : list) {
+            View item = inflater.inflate(R.layout.for_search_movie, linearLayout, false);
+
+            ImageView img = (ImageView) item.findViewById(R.id.img);
+            int id_img = SearchMoviesActivity.this.getResources().getIdentifier(movieForSearch.getImg() + "small", "drawable", getPackageName());
+            img.setImageDrawable(getResources().getDrawable(id_img));
+
+            TextView title = (TextView) item.findViewById(R.id.txt_title);
+            title.setText(movieForSearch.getTitleMovie());
+
+            // item.setOnClickListener(this);
+            item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+            linearLayout.addView(item);
+        }
+
+
     }
 }

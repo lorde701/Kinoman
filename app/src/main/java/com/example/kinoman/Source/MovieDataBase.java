@@ -1,12 +1,15 @@
 package com.example.kinoman.Source;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.kinoman.ClFrDwn.FilmObjectForDownload;
+import com.example.kinoman.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,8 +145,10 @@ public class MovieDataBase {
 
     public Movie selectInfoMovie(int rand_num ) {
         Movie movie = new Movie();
-        open();
         Cursor c;
+
+        DBHelper dbh = new DBHelper(context);
+        db = dbh.getWritableDatabase();
 
         movie.setM_Id(rand_num);
 
@@ -164,7 +169,7 @@ public class MovieDataBase {
             id = c.getColumnIndex(dbh.TM_FLAG);
             movie.setM_flag(c.getInt(id));
         }
-        close();
+        db.close();
         return movie;
     }
 
@@ -461,12 +466,15 @@ public class MovieDataBase {
 
 
     public List<MovieForSearch> getListMovie(String search) {
+
         List<MovieForSearch> list = new ArrayList<>();
 
+        open();
         Cursor c;
 
-        String select = "select from " + dbh.TABLE_NAME_MOVIE + "(" + dbh.TM_TITLE + ", " + dbh.TM_ID + ", " + dbh.TM_IMAGE + ", " + dbh.TM_ASSESSMENT + ") where " + dbh.TM_TITLE + " = ?";
-        c = db.rawQuery(select, new String[] { search });
+        String select = "select " +  dbh.TM_TITLE + ", " + dbh.TM_ID + ", " + dbh.TM_IMAGE + ", " + dbh.TM_ASSESSMENT + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_TITLE + " like \'%" + search + "%\' ;";
+        Log.d(LOG_TAG_DB, select);
+        c = db.rawQuery(select, new String[] { });
         //c = db.query(dbh.TABLE_NAME_MOVIE, new String[] {dbh.TM_ID, dbh.TM_TITLE, dbh.TM_IMAGE, dbh.TM_ASSESSMENT}, dbh.TM_TITLE + " = ?", new String[] {"LIKE %" + search + "%", null, null})
 
         logCursor(c);
