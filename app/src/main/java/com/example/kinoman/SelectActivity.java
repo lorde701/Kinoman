@@ -36,6 +36,9 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     LinearLayout layout5;
 
 
+    MovieDataBase mdb;
+    Movie mov;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,10 +133,12 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     protected void otherMovie() {
+
+        mdb = new MovieDataBase(this);
+        mov = mdb.selectRandMovie();
+
         //super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
-        MovieDataBase mdb = new MovieDataBase(this);
-        Movie mov = mdb.selectRandMovie();
 
         txt_title_movie = (TextView) findViewById(R.id.txt_title_movie);
         txt_title_movie.setText(mov.getM_title());
@@ -221,7 +226,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-        //MovieDataBase database = new MovieDataBase(this);
+        MovieDataBase database = new MovieDataBase(this);
 
         switch (v.getId()) {
 
@@ -234,6 +239,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 layout3.setBackground(getResources().getDrawable(R.drawable.star));
                 layout4.setBackground(getResources().getDrawable(R.drawable.star));
                 layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                database.setAssessment(mov.getM_Id(), 1);
                 //mdb.setAssessment(mov.getM_Id(), 1);
                 break;
             case R.id.layout2:
@@ -242,6 +248,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 layout3.setBackground(getResources().getDrawable(R.drawable.star));
                 layout4.setBackground(getResources().getDrawable(R.drawable.star));
                 layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                database.setAssessment(mov.getM_Id(), 2);
                 // mdb.setAssessment(mov.getM_Id(), 2);
                 break;
             case R.id.layout3:
@@ -250,6 +257,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 layout3.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout4.setBackground(getResources().getDrawable(R.drawable.star));
                 layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                database.setAssessment(mov.getM_Id(), 3);
                 //mdb.setAssessment(mov.getM_Id(), 3);
                 break;
             case R.id.layout4:
@@ -258,6 +266,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 layout3.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout4.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                database.setAssessment(mov.getM_Id(), 4);
                 //mdb.setAssessment(mov.getM_Id(), 4);
                 break;
             case R.id.layout5:
@@ -266,6 +275,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 layout3.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout4.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout5.setBackground(getResources().getDrawable(R.drawable.star2));
+                database.setAssessment(mov.getM_Id(), 5);
                 //mdb.setAssessment(mov.getM_Id(), 5);
                 break;
 

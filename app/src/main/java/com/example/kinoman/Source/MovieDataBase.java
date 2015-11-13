@@ -45,11 +45,10 @@ public class MovieDataBase {
         }
     }
 
-    //public void onUpdataDB() {
-    //    this.open();
-    //    //dbh.onUpdata(db);
-    //    this.close();
-    //}
+ /*   public void onUpdataDB() {
+        this.open();
+        this.close();
+  }  */
 
     public void addDatas(List<FilmObjectForDownload> films) {
         open();
@@ -502,14 +501,27 @@ public class MovieDataBase {
 
         ContentValues cv = new ContentValues();
         //DatasForDB datasForDB = new DatasForDB();
-        Cursor c;
 
-        String select = "select " + dbh.TM_ID + ", " + dbh.TM_ASSESSMENT + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ID + " = " + IdMovie + ";";
-        c = db.rawQuery(select, new String[] { });
+        // String select = "updata " + dbh.TM_ID + ", " + dbh.TM_ASSESSMENT + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ID + " = " + IdMovie + ";";
+        //String temp = "update " + dbh.TABLE_NAME_MOVIE + " set " + dbh.TM_ASSESSMENT + " = " + Assesment + " where " + dbh.TM_ID + " = " + IdMovie + ";";
+        //Log.d(LOG_TAG_DB, temp);
+        //db.rawQuery(temp, new String[]{});
 
+        cv.put(dbh.TM_ASSESSMENT, Assesment);
+
+        db.update(dbh.TABLE_NAME_MOVIE, cv, dbh.TM_ID + " = ?", new String[] { String.valueOf(IdMovie) });
+
+        Cursor c = db.rawQuery("select * from movie where _id = " + IdMovie + ";", new String[]{});
+
+        logCursor(c);
+
+        int index = c.getColumnIndex(dbh.TM_ASSESSMENT);
+        int id = 0;
         if(c.moveToFirst()) {
-            cv.put(dbh.TM_ASSESSMENT, Assesment);
+                id = c.getInt(index);
         }
+
+        Log.d(LOG_TAG_DB, "Оценка: " + String.valueOf(id));
 
         close();
     }

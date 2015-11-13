@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class SelectGenreActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private final String LOG_CAT = "SelectGenreActivity";
     Button btn_do;
 
     RadioButton radioButton;
@@ -31,10 +33,8 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_genre);
 
-       // btn_do = (Button).findViewById(R.id.btn_do);
-
-
-
+        btn_do = (Button)findViewById(R.id.btn_do);
+        btn_do.setOnClickListener(this);
 
         List<Genre> list = database.getListGenre();
 
@@ -52,9 +52,10 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         //RadioButton radioButton = (RadioButton)findViewById(R.id.radioButton);
         radioButton = (RadioButton)item.findViewById(R.id.radioButton);
 
-        radioButton.setText("Без жанра");
+        radioButton.setText("Любой жанр");
 
         radioButton.setId(i++);
+
         radioButton.setOnClickListener(this);
 
 //            radioButton.setText("GH");
@@ -66,19 +67,15 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         for (Genre genre : list) {
             item = Inflater.inflate(R.layout.for_select_movie, rg, false);
 
-            //RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
-
-            //RadioButton radioButton = (RadioButton)findViewById(R.id.radioButton);
             radioButton = (RadioButton)item.findViewById(R.id.radioButton);
 
             radioButton.setText(genre.getName());
 
             radioButton.setId(i++);
-//            radioButton.setText("GH");
-            //radioGroup.addView(radioButton);
 
             item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
             rg.addView(item);
+
         }
 
     }
@@ -91,20 +88,31 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
 
+        Log.d(LOG_CAT, "Кнопка нажата");
+
+        RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
         Intent intent = null;
 
-
-
-
-        switch (v.getId()) {
+       switch (v.getId()) {
 
             case R.id.btn_do:
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                if(radioButton.isChecked()) {
+
+                switch (radioGroup.getCheckedRadioButtonId()) {
+                    case 50:
+                        intent = new Intent(this, SelectActivity.class);
+                        startActivity(intent);
+                        Log.d(LOG_CAT, "id radioBtn = 50");
+                        break;
+                }
+
+
+                /*if(radioButton.isChecked()) {
                     intent = new Intent(this, SearchActivity.class);
                     startActivity(intent);
                 }
-/*
+
                 switch (radioButton.getId()) {
 
                     case 50:
