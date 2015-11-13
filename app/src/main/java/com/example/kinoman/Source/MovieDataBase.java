@@ -491,8 +491,53 @@ public class MovieDataBase {
             } while (c.moveToNext());
         }
 
+        close();
         c.close();
         this.close();
         return list;
     }
+
+    public void setAssessment(int IdMovie, int Assesment) {
+        open();
+
+        ContentValues cv = new ContentValues();
+        //DatasForDB datasForDB = new DatasForDB();
+        Cursor c;
+
+        String select = "select " + dbh.TM_ID + ", " + dbh.TM_ASSESSMENT + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ID + " = " + IdMovie + ";";
+        c = db.rawQuery(select, new String[] { });
+
+        if(c.moveToFirst()) {
+            cv.put(dbh.TM_ASSESSMENT, Assesment);
+        }
+
+        close();
+    }
+
+    public List<Genre> getListGenre() {
+        List<Genre> list = new ArrayList<>();
+
+        open();
+        Cursor c;
+
+        String select = "select * from " + dbh.TABLE_NAME_GENRE + ";";
+        c = db.rawQuery(select, new String[] {});
+
+        logCursor(c);
+
+
+        int index_id = c.getColumnIndex(dbh.TG_ID_GENRE);
+        int index_name = c.getColumnIndex(dbh.TG_NAME_GENRE);
+
+        if(c.moveToFirst()) {
+            do {
+                Genre genre = new Genre(c.getInt(index_id), c.getString(index_name));
+                list.add(genre);
+            } while (c.moveToNext());
+        }
+
+        close();
+        return list;
+    }
 }
+

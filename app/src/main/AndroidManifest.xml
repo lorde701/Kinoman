@@ -50,6 +50,10 @@
             android:name=".SearchMoviesActivity"
             android:label="@string/title_activity_search_movies" >
         </activity>
+        <activity
+            android:name=".SelectGenreActivity"
+            android:label="@string/title_activity_select_genre" >
+        </activity>
     </application>
 
 </manifest>

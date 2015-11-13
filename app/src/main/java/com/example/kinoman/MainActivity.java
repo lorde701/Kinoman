@@ -83,29 +83,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // создаем объект для данных
         //ContentValues cv = new ContentValues();
+        Intent intent;
 
         switch (v.getId()) {
             case R.id.btn_about:
-                Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intent_about);
+                intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_search:
-                Intent intent_search = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(intent_search);
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.btn_select:
+            /*case R.id.btn_select:
                 Intent intent_select = new Intent(MainActivity.this, SelectActivity.class);
                 startActivity(intent_select);
 
-                break;
-            case R.id.btn_watched:
-                Intent intent_watched = new Intent(MainActivity.this, WhatchedActivity.class);
-                startActivity(intent_watched);
-                break;
-            case R.id.btn_add:
-                Intent intent_add =new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent_add);
+                break;*/
 
+
+
+           /* case R.id.btn_watched:
+                intent = new Intent(MainActivity.this, WhatchedActivity.class);
+                startActivity(intent);
+                break;*/
+            case R.id.btn_add:
+                intent =new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btn_select:
+                intent = new Intent(this, SelectGenreActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
