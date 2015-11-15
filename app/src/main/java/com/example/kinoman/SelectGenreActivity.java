@@ -43,7 +43,7 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         //LinearLayout lin = (LinearLayout)findViewById(R.id.linear);
         LayoutInflater Inflater = this.getLayoutInflater();
 
-        int i = 50;
+        int i = 0;
 
         View item = Inflater.inflate(R.layout.for_select_movie, rg, false);
 
@@ -98,35 +98,21 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_do:
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-
                 switch (radioGroup.getCheckedRadioButtonId()) {
-                    case 50:
+                    case 0:
                         intent = new Intent(this, SelectActivity.class);
                         startActivity(intent);
                         Log.d(LOG_CAT, "id radioBtn = 50");
                         break;
+                    default:
+                        int idCheckedRadioButton = radioGroup.getCheckedRadioButtonId();
+                        String text = (String) ((RadioButton) findViewById(idCheckedRadioButton)).getText();
+                        intent = new Intent(this, SelectActivity.class);
+                        intent.putExtra("genre", text);
+                        startActivity(intent);
                 }
 
 
-                /*if(radioButton.isChecked()) {
-                    intent = new Intent(this, SearchActivity.class);
-                    startActivity(intent);
-                }
-
-                switch (radioButton.getId()) {
-
-                    case 50:
-                        intent = new Intent(this, SearchActivity.class);
-
-                }
-
-                //intent = Intent(this, );
-
-            case 50:
-                intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);*/
         }
-       // startActivity(intent);
-
     }
 }

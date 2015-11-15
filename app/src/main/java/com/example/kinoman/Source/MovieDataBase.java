@@ -68,11 +68,11 @@ public class MovieDataBase {
             cv.put(dbh.TM_YEAR_RELEASE, film.getYear());
             //cv.put(dbh.TM_DIRECTOR, film.getDirector());
             cv.put(dbh.TM_DESCRIPTION, film.getDescription());
-            cv.put(dbh.TM_ASSESSMENT, 11);
+            cv.put(dbh.TM_ASSESSMENT, 6);
             cv.put(dbh.TM_FLAG, 0);
             cv.put(dbh.TM_IMAGE, MT_img[i]);
             cv.put(dbh.TM_DIRECTOR, addDirector(film.getDirector()));
-            id_movie = (int)db.insert(dbh.TABLE_NAME_MOVIE, null, cv);
+            id_movie = (int) db.insert(dbh.TABLE_NAME_MOVIE, null, cv);
             addLinkMovieGenre(id_movie, film.getGanres());
             addLinkMovieCountry(id_movie, film.getCountries());
             addLinkMovieActor(id_movie, film.getActors());
@@ -99,10 +99,10 @@ public class MovieDataBase {
 
         Cursor c;
 
-        c = db.query(dbh.TABLE_NAME_MOVIE, null, null, null, null, null, null);
+        /*c = db.query(dbh.TABLE_NAME_MOVIE, null, null, null, null, null, null);
         logCursor(c);
 
-        /*c = db.query(dbh.TABLE_NAME_DIRECTOR, null, null, null, null, null, null);
+        c = db.query(dbh.TABLE_NAME_DIRECTOR, null, null, null, null, null, null);
         logCursor(c);
 
 
@@ -113,13 +113,13 @@ public class MovieDataBase {
         logCursor(c);
 
         c = db.query(dbh.TABLE_NAME_LINK_MOVIE_ACTORS, null, null, null, null, null, null);
-        logCursor(c);*/
+        logCursor(c);
 
         c = db.query(dbh.TABLE_NAME_GENRE, null, null, null, null, null, null);
         logCursor(c);
 
         c = db.query(dbh.TABLE_NAME_LINK_MOVIE_GENRE, null, null, null, null, null, null);
-        logCursor(c);
+        logCursor(c);*/
 
         close();
     }
@@ -127,22 +127,71 @@ public class MovieDataBase {
     public int selectIdMovie() {
         open();
         Cursor c;
+        int rand_num = -10;
+        int i = 0;
+        int[] array = new int[35];
 
-        String selectCount = "select count(*) from " + dbh.TABLE_NAME_MOVIE + ";";
+        String selectCount = "select " + dbh.TM_ID + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6;";
         c = db.rawQuery(selectCount, new String[]{});
 
-        logCursor(c);
-        c.moveToFirst();
-        int count = c.getInt(c.getColumnIndex("count(*)"));
+        //logCursor(c);
+        if (c.moveToFirst()) {
+            do {
+                array[i] = c.getInt(c.getColumnIndex(dbh.TM_ID));
 
-        Random rand = new Random();
-        int rand_num = rand.nextInt(count - 1) + 1;
+                Log.d(LOG_TAG_DB, " ");
+                Log.d(LOG_TAG_DB, "Индекс фильма заданного жанра: " + c.getInt(c.getColumnIndex(dbh.TM_ID)));
+                Log.d(LOG_TAG_DB, "Индекс в массиве: " + i);
+                Log.d(LOG_TAG_DB, "Элемент массива array[i]: " + array[i]);
+                Log.d(LOG_TAG_DB, " ");
+                i++;
+            } while (c.moveToNext());
+
+            Random rand = new Random();
+            int index = rand.nextInt(i);
+            Log.d(LOG_TAG_DB, "Index: " + index);
+            Log.d(LOG_TAG_DB, " ");
+            rand_num = array[index];
+        }
 
         close();
         return rand_num;
     }
 
-    public Movie selectInfoMovie(int rand_num ) {
+    public int selectIdMovie(String genre) {
+        open();
+        Cursor c;
+
+        String idGenre = "select " + dbh.TG_ID_GENRE + " from " + dbh.TABLE_NAME_GENRE + " where " + dbh.TG_NAME_GENRE + " = " + genre + ";";
+        c = db.rawQuery(idGenre, new String[]{});
+        //Log.d(LOG_TAG_DB, "SQL: " + c);
+
+        // logCursor(c);
+        c.moveToFirst();
+        int[] arrayIdMovie = new int[35];
+        int i = 0;
+
+        int idG = c.getInt(c.getColumnIndex(dbh.TG_ID_GENRE));
+
+        String arrayId = "select " + dbh.TLMG_ID_MOVIE + " from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + dbh.TLMG_ID_GENRE + " = " + idG + ";";
+        c = db.rawQuery(arrayId, new String[]{});
+
+        //logCursor(c);
+
+        c.moveToFirst();
+        do {
+            arrayIdMovie[i++] = c.getInt(c.getColumnIndex(dbh.TLMG_ID_MOVIE));
+        } while (c.moveToNext());
+
+
+        Random rand = new Random();
+        int rand_num = arrayIdMovie[rand.nextInt(i) - 1];
+
+        close();
+        return rand_num;
+    }
+
+    public Movie selectInfoMovie(int rand_num) {
         Movie movie = new Movie();
         Cursor c;
 
@@ -154,9 +203,9 @@ public class MovieDataBase {
         String select = dbh.TM_ID + " = \"" + rand_num + "\"";
         c = db.query(dbh.TABLE_NAME_MOVIE, null, select, null, null, null, null);
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             int id = c.getColumnIndex(dbh.TM_TITLE);
-             movie.setM_title(c.getString(id));
+            movie.setM_title(c.getString(id));
             id = c.getColumnIndex(dbh.TM_YEAR_RELEASE);
             movie.setM_year(c.getString(id));
             id = c.getColumnIndex(dbh.TM_DESCRIPTION);
@@ -172,7 +221,7 @@ public class MovieDataBase {
         return movie;
     }
 
-    public String selectGenre(int rand_num ) {
+    public String selectGenre(int rand_num) {
         open();
         String str = "";
         Cursor c;
@@ -182,17 +231,17 @@ public class MovieDataBase {
 
         String selectCount = "select * from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + whatSelect + ";";
         c = db.rawQuery(selectCount, new String[]{});
-        Log.d("workWithDataDase", "cursor c: " + c);
+        //Log.d("workWithDataDase", "cursor c: " + c);
 
 
-        logCursor(c);
-        Log.d("workWithDataDase", "log: " + c.moveToFirst());
+        //logCursor(c);
+        //Log.d("workWithDataDase", "log: " + c.moveToFirst());
         c.moveToFirst();
         Boolean flag = false;
 
         do {
             int count = c.getInt(c.getColumnIndex(dbh.TLMG_ID_GENRE));
-            Log.d("workWithDataDase", "ID жанра: " + count);
+            //Log.d("workWithDataDase", "ID жанра: " + count);
 
             String whatSelect2 = dbh.TG_ID_GENRE + " = \"" + count + "\"";
             cursor = db.query(dbh.TABLE_NAME_GENRE, null, whatSelect2, null, null, null, null);
@@ -207,7 +256,7 @@ public class MovieDataBase {
                     flag = true;
                 }
 
-                Log.d("workWithDataDase", "Название: " + idG);
+                //Log.d("workWithDataDase", "Название: " + idG);
             }
         } while (c.moveToNext());
         close();
@@ -215,7 +264,7 @@ public class MovieDataBase {
         return str;
     }
 
-    public String selectCountry( int rand_num ) {
+    public String selectCountry(int rand_num) {
         open();
         String str = "";
         Cursor c;
@@ -225,16 +274,16 @@ public class MovieDataBase {
 
         String selectCount = "select * from " + dbh.TABLE_NAME_LINK_MOVIE_COUNTRY + " where " + whatSelect + ";";
         c = db.rawQuery(selectCount, new String[]{});
-        Log.d("workWithDataDase", "cursor c: " + c);
+        //Log.d("workWithDataDase", "cursor c: " + c);
 
-        logCursor(c);
-        Log.d("workWithDataDase", "log: " + c.moveToFirst());
+        //logCursor(c);
+        //Log.d("workWithDataDase", "log: " + c.moveToFirst());
         c.moveToFirst();
         Boolean flag = false;
 
         do {
             int count = c.getInt(c.getColumnIndex(dbh.TLMC_ID_COUNTRY));
-            Log.d("workWithDataDase", "ID жанра: " + count);
+            //Log.d("workWithDataDase", "ID жанра: " + count);
 
             String whatSelect2 = dbh.TC_ID_COUNTRY + " = \"" + count + "\"";
             cursor = db.query(dbh.TABLE_NAME_COUNTRY, null, whatSelect2, null, null, null, null);
@@ -249,14 +298,14 @@ public class MovieDataBase {
                     flag = true;
                 }
 
-                Log.d("workWithDataDase", "Название: " + idG);
+                //Log.d("workWithDataDase", "Название: " + idG);
             }
         } while (c.moveToNext());
         close();
         return str;
     }
 
-    public String selectActors( int rand_num ) {
+    public String selectActors(int rand_num) {
         open();
         String str = "";
         Cursor c;
@@ -266,16 +315,16 @@ public class MovieDataBase {
 
         String selectCount = "select * from " + dbh.TABLE_NAME_LINK_MOVIE_ACTORS + " where " + whatSelect + ";";
         c = db.rawQuery(selectCount, new String[]{});
-        Log.d("workWithDataDase", "cursor c: " + c);
+        //Log.d("workWithDataDase", "cursor c: " + c);
 
-        logCursor(c);
-        Log.d("workWithDataDase", "log: " + c.moveToFirst());
+        //logCursor(c);
+        //Log.d("workWithDataDase", "log: " + c.moveToFirst());
         c.moveToFirst();
         Boolean flag = false;
 
         do {
             int count = c.getInt(c.getColumnIndex(dbh.TLMA_ID_ACTOR));
-            Log.d("workWithDataDase", "ID жанра: " + count);
+            //Log.d("workWithDataDase", "ID жанра: " + count);
 
             String whatSelect2 = dbh.TA_ID_ACTORS + " = \"" + count + "\"";
             cursor = db.query(dbh.TABLE_NAME_ACTORS, null, whatSelect2, null, null, null, null);
@@ -290,22 +339,23 @@ public class MovieDataBase {
                     flag = true;
                 }
 
-                Log.d("workWithDataDase", "Название: " + idG);
+                //
+                //Log.d("workWithDataDase", "Название: " + idG);
             }
         } while (c.moveToNext());
         close();
         return str;
     }
 
-    public String selectDirector( int rand_num ) {
-        String str ="";
+    public String selectDirector(int rand_num) {
+        String str = "";
         Cursor c;
         open();
 
         String whatSelect = dbh.TD_ID_DIRECTOR + " = \"" + rand_num + "\"";
 
         c = db.query(dbh.TABLE_NAME_DIRECTOR, null, whatSelect, null, null, null, null);
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             int id = c.getColumnIndex(dbh.TD_NAME_DIRECTOR);
             str = c.getString(id);
         }
@@ -313,17 +363,21 @@ public class MovieDataBase {
         return str;
     }
 
-    public Movie selectRandMovie() {
+    public Movie selectRandMovie(String genre) {
         Movie movie;
         movie = new Movie();
-        int idMovie = selectIdMovie();
-
-        movie = selectInfoMovie(idMovie);
-        movie.setM_genre(selectGenre(idMovie));
-        movie.setM_countries(selectCountry(idMovie));
-        movie.setM_director(selectDirector(idMovie));
-        movie.setM_actors(selectActors(idMovie));
-
+        if(genre != null) {
+            int idMovie = selectIdMovie();
+            if (idMovie != -10) {
+                movie = selectInfoMovie(idMovie);
+                movie.setM_genre(selectGenre(idMovie));
+                movie.setM_countries(selectCountry(idMovie));
+                movie.setM_director(selectDirector(idMovie));
+                movie.setM_actors(selectActors(idMovie));
+                return movie;
+            } else //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                movie.setM_Id(-10);
+        }
         return movie;
     }
 
@@ -338,7 +392,7 @@ public class MovieDataBase {
         c = db.query(dbh.TABLE_NAME_DIRECTOR, null, whatSelect, null, null, null, null);
 
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             int idIndex = c.getColumnIndex(dbh.TD_ID_DIRECTOR);
             id = c.getInt(idIndex);
         } else {
@@ -358,7 +412,7 @@ public class MovieDataBase {
         c = db.query(dbh.TABLE_NAME_GENRE, null, whatSelect, null, null, null, null);
 
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             int idIndex = c.getColumnIndex(dbh.TG_ID_GENRE);
             id = c.getInt(idIndex);
         } else {
@@ -372,7 +426,7 @@ public class MovieDataBase {
 
         ContentValues cv = new ContentValues();
         int id_genre;
-        for(int i = 0; i < genres.size(); i++) {
+        for (int i = 0; i < genres.size(); i++) {
             id_genre = addGenre(genres.get(i));
             cv.put(dbh.TLMG_ID_MOVIE, id_movie);
             cv.put(dbh.TLMG_ID_GENRE, id_genre);
@@ -390,7 +444,7 @@ public class MovieDataBase {
         c = db.query(dbh.TABLE_NAME_COUNTRY, null, whatSelect, null, null, null, null);
 
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             int idIndex = c.getColumnIndex(dbh.TC_ID_COUNTRY);
             id = c.getInt(idIndex);
         } else {
@@ -404,7 +458,7 @@ public class MovieDataBase {
 
         ContentValues cv = new ContentValues();
         int id_country;
-        for(int i = 0; i < countries.size(); i++) {
+        for (int i = 0; i < countries.size(); i++) {
             id_country = addCountry(countries.get(i));
             cv.put(dbh.TLMC_ID_MOVIE, id_movie);
             cv.put(dbh.TLMC_ID_COUNTRY, id_country);
@@ -422,7 +476,7 @@ public class MovieDataBase {
         c = db.query(dbh.TABLE_NAME_ACTORS, null, whatSelect, null, null, null, null);
 
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             int idIndex = c.getColumnIndex(dbh.TA_ID_ACTORS);
             id = c.getInt(idIndex);
         } else {
@@ -436,7 +490,7 @@ public class MovieDataBase {
 
         ContentValues cv = new ContentValues();
         int id_actor;
-        for(int i = 0; i < actors.size(); i++) {
+        for (int i = 0; i < actors.size(); i++) {
             id_actor = addActor(actors.get(i));
             cv.put(dbh.TLMA_ID_MOVIE, id_movie);
             cv.put(dbh.TLMA_ID_ACTOR, id_actor);
@@ -471,19 +525,19 @@ public class MovieDataBase {
         open();
         Cursor c;
 
-        String select = "select " +  dbh.TM_TITLE + ", " + dbh.TM_ID + ", " + dbh.TM_IMAGE + ", " + dbh.TM_ASSESSMENT + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_TITLE + " like \'%" + search + "%\' ;";
-        Log.d(LOG_TAG_DB, select);
-        c = db.rawQuery(select, new String[] { });
+        String select = "select " + dbh.TM_TITLE + ", " + dbh.TM_ID + ", " + dbh.TM_IMAGE + ", " + dbh.TM_ASSESSMENT + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_TITLE + " like \'%" + search + "%\' ;";
+        //Log.d(LOG_TAG_DB, select);
+        c = db.rawQuery(select, new String[]{});
         //c = db.query(dbh.TABLE_NAME_MOVIE, new String[] {dbh.TM_ID, dbh.TM_TITLE, dbh.TM_IMAGE, dbh.TM_ASSESSMENT}, dbh.TM_TITLE + " = ?", new String[] {"LIKE %" + search + "%", null, null})
 
-        logCursor(c);
+        //logCursor(c);
 
         int index_id = c.getColumnIndex(dbh.TM_ID);
         int index_title = c.getColumnIndex(dbh.TM_TITLE);
         int index_img = c.getColumnIndex(dbh.TM_IMAGE);
         int index_assessment = c.getColumnIndex(dbh.TM_ASSESSMENT);
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             do {
                 MovieForSearch temp = new MovieForSearch(c.getInt(index_id), c.getString(index_title), c.getString(index_img), c.getInt(index_assessment));
                 list.add(temp);
@@ -509,16 +563,16 @@ public class MovieDataBase {
 
         cv.put(dbh.TM_ASSESSMENT, Assesment);
 
-        db.update(dbh.TABLE_NAME_MOVIE, cv, dbh.TM_ID + " = ?", new String[] { String.valueOf(IdMovie) });
+        db.update(dbh.TABLE_NAME_MOVIE, cv, dbh.TM_ID + " = ?", new String[]{String.valueOf(IdMovie)});
 
         Cursor c = db.rawQuery("select * from movie where _id = " + IdMovie + ";", new String[]{});
 
-        logCursor(c);
+        //logCursor(c);
 
         int index = c.getColumnIndex(dbh.TM_ASSESSMENT);
         int id = 0;
-        if(c.moveToFirst()) {
-                id = c.getInt(index);
+        if (c.moveToFirst()) {
+            id = c.getInt(index);
         }
 
         Log.d(LOG_TAG_DB, "Оценка: " + String.valueOf(id));
@@ -533,15 +587,15 @@ public class MovieDataBase {
         Cursor c;
 
         String select = "select * from " + dbh.TABLE_NAME_GENRE + ";";
-        c = db.rawQuery(select, new String[] {});
+        c = db.rawQuery(select, new String[]{});
 
-        logCursor(c);
+        //logCursor(c);
 
 
         int index_id = c.getColumnIndex(dbh.TG_ID_GENRE);
         int index_name = c.getColumnIndex(dbh.TG_NAME_GENRE);
 
-        if(c.moveToFirst()) {
+        if (c.moveToFirst()) {
             do {
                 Genre genre = new Genre(c.getInt(index_id), c.getString(index_name));
                 list.add(genre);

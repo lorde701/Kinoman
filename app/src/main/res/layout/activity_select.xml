@@ -32,7 +32,6 @@
                     android:id="@+id/txt_title_movie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="25dp" />
             </LinearLayout>
@@ -62,7 +61,6 @@
                     android:id="@+id/txt_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -76,7 +74,6 @@
                     android:id="@+id/txt_genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -90,7 +87,6 @@
                     android:id="@+id/txt_country"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -104,7 +100,6 @@
                     android:id="@+id/txt_director"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -118,7 +113,6 @@
                     android:id="@+id/txt_actors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Large"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -132,7 +126,6 @@
                     android:id="@+id/txt_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -150,8 +143,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@drawable/star">
+                    android:layout_marginRight="2dp">
 
                 </LinearLayout>
 
@@ -161,8 +153,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@drawable/star">
+                    android:layout_marginRight="2dp">
 
                 </LinearLayout>
 
@@ -172,8 +163,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@drawable/star">
+                    android:layout_marginRight="2dp">
 
                 </LinearLayout>
 
@@ -183,8 +173,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@drawable/star">
+                    android:layout_marginRight="2dp">
 
                 </LinearLayout>
 
@@ -194,8 +183,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@drawable/star">
+                    android:layout_marginRight="2dp">
 
                 </LinearLayout>
 
@@ -208,14 +196,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_gravity="center">
-
-                <Button
-                    android:id="@+id/btn_watchedMovie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Смотрел"
-                    android:layout_gravity="center" />
 
             </FrameLayout>
 
