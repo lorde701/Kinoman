@@ -1,11 +1,13 @@
 package com.example.kinoman;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import java.util.List;
 public class SearchMoviesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieDataBase dataBase;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
 
         List<MovieForSearch> list = dataBase.getListMovie(nameMovie);
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
+        linearLayout = (LinearLayout) findViewById(R.id.linear);
         LayoutInflater inflater = this.getLayoutInflater();
 
 
@@ -68,10 +71,15 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
             TextView title = (TextView) item.findViewById(R.id.txt_title);
             title.setText(movieForSearch.getTitleMovie());
 
+           // TextView assessment = (TextView)item.findViewById();
+
             // item.setOnClickListener(this);
             item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+            item.setId(movieForSearch.getIdMovie());
+            item.setOnClickListener(this);
 
             linearLayout.addView(item);
+            //linearLayout.setOnClickListener(this);
         }
 
 
@@ -80,5 +88,12 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
 
+        int id = v.getId();
+        Log.d("qwerty", "SearchMovieActivity idMovie: " + id);
+        Intent intent = new Intent(this, SelectActivity.class);
+        intent.putExtra("flag", "SearchMoviesActivity");
+        Log.d("qwerty", "intent.putExtra(\"flag\", \"SearchMoviesActivity\");");
+        intent.putExtra("idMovie", id);
+        startActivity(intent);
     }
 }

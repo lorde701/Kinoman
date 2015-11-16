@@ -20,7 +20,7 @@ import com.example.kinoman.Source.MovieDataBase;
 
 import java.util.List;
 
-public class SelectGenreActivity extends AppCompatActivity implements View.OnClickListener{
+public class SelectGenreActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String LOG_CAT = "SelectGenreActivity";
     Button btn_do;
@@ -33,12 +33,12 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_genre);
 
-        btn_do = (Button)findViewById(R.id.btn_do);
+        btn_do = (Button) findViewById(R.id.btn_do);
         btn_do.setOnClickListener(this);
 
         List<Genre> list = database.getListGenre();
 
-        RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup);
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
 
         //LinearLayout lin = (LinearLayout)findViewById(R.id.linear);
         LayoutInflater Inflater = this.getLayoutInflater();
@@ -50,13 +50,14 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         //RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
 
         //RadioButton radioButton = (RadioButton)findViewById(R.id.radioButton);
-        radioButton = (RadioButton)item.findViewById(R.id.radioButton);
+        radioButton = (RadioButton) item.findViewById(R.id.radioButton);
 
         radioButton.setText("Любой жанр");
 
         radioButton.setId(i++);
 
-        radioButton.setOnClickListener(this);
+        radioButton.setChecked(true);
+        // radioButton.setOnClickListener(this);
 
 //            radioButton.setText("GH");
         //radioGroup.addView(radioButton);
@@ -67,7 +68,7 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
         for (Genre genre : list) {
             item = Inflater.inflate(R.layout.for_select_movie, rg, false);
 
-            radioButton = (RadioButton)item.findViewById(R.id.radioButton);
+            radioButton = (RadioButton) item.findViewById(R.id.radioButton);
 
             radioButton.setText(genre.getName());
 
@@ -90,24 +91,23 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
 
         Log.d(LOG_CAT, "Кнопка нажата");
 
-        RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
-        Intent intent = null;
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        Intent intent = new Intent(this, SelectActivity.class);
+        intent.putExtra("flag", "SelectGenreActivity");
 
-       switch (v.getId()) {
+        switch (v.getId()) {
 
             case R.id.btn_do:
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 switch (radioGroup.getCheckedRadioButtonId()) {
                     case 0:
-                        intent = new Intent(this, SelectActivity.class);
                         startActivity(intent);
                         Log.d(LOG_CAT, "id radioBtn = 50");
                         break;
                     default:
                         int idCheckedRadioButton = radioGroup.getCheckedRadioButtonId();
                         String text = (String) ((RadioButton) findViewById(idCheckedRadioButton)).getText();
-                        intent = new Intent(this, SelectActivity.class);
                         intent.putExtra("genre", text);
                         startActivity(intent);
                 }

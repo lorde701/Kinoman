@@ -675,14 +675,14 @@ public class MovieDataBase {
         close();
         return list;
     }
-    public List<MovieForSearch> WatchedMovie() {
+    public List<MovieForSearch> getWatchedMovie() {
         List<MovieForSearch> list = new ArrayList<>();
 
         open();
         Cursor c;
 
         String select = "select " + dbh.TM_TITLE + ", " + dbh.TM_ID + ", " + dbh.TM_IMAGE + ", " + dbh.TM_ASSESSMENT +
-                " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " <> 6 order by " + dbh.TM_ASSESSMENT + ";";
+                " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " <> 6 order by " + dbh.TM_ASSESSMENT + " desc;";
         //Log.d(LOG_TAG_DB, select);
         c = db.rawQuery(select, new String[]{});
 
@@ -703,5 +703,35 @@ public class MovieDataBase {
         this.close();
         return list;
     }
+
+    public Movie getInfoMovieForId(int idMovie) {
+
+        Movie movie = new Movie();
+        open();
+        Cursor c;
+
+        String select = "select * from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ID + " = " + idMovie;
+        c = db.rawQuery(select, new String[] {});
+
+        if(c.moveToFirst()) {
+            movie.setM_Id(c.getInt(c.getColumnIndex(dbh.TM_ID)));
+            movie.setM_description(c.getString(c.getColumnIndex(dbh.TM_DESCRIPTION)));
+            movie.setM_img(c.getString(c.getColumnIndex(dbh.TM_IMAGE)));
+            movie.setM_assessment(c.getInt(c.getColumnIndex(dbh.TM_ASSESSMENT)));
+            movie.setM_title(c.getString(c.getColumnIndex(dbh.TM_TITLE)));
+            movie.setM_year(c.getString(c.getColumnIndex(dbh.TM_YEAR_RELEASE)));
+            movie.setM_actors(selectActors(idMovie));
+            movie.setM_genre(selectGenre(idMovie));
+            movie.setM_countries(selectCountry(idMovie));
+            movie.setM_director(selectDirector(idMovie));
+
+            Log.d("qwerty", "MovieDataBase movie.getM_Id(): " + movie.getM_Id());
+            Log.d("qwerty", "MovieDataBase movie.getM_img(): " + movie.getM_img());
+
+        }
+
+        return movie;
+    }
+
 }
 

@@ -44,19 +44,20 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
     MovieDataBase mdb;
     Movie mov;
+    String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
 
+        //flag = getIntent().getStringExtra("flag");
 
         btn_other = (Button) findViewById(R.id.btn_other);
         btn_other.setOnClickListener(this);
 
         btn_willWatch = (Button) findViewById(R.id.btn_willWatch);
         btn_willWatch.setOnClickListener(this);
-
 
         txt_title_movie = (TextView) findViewById(R.id.txt_title_movie);
         txt_year = (TextView) findViewById(R.id.txt_year);
@@ -85,14 +86,29 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     protected void otherMovie() {
 
         mdb = new MovieDataBase(this);
-
+        flag = getIntent().getStringExtra("flag");
         genre = getIntent().getStringExtra("genre");
+        int idMovie = getIntent().getIntExtra("idMovie", -10);
 
-        if(genre == null) {
-            mov = mdb.selectRandMovie();
-        }else {
-            mov =mdb.selectRandMovie(genre);
-            Log.d("qwerty", "Поиск по жанру");
+        switch (flag) {
+            case "SelectGenreActivity":
+                if (genre == null) {
+                    mov = mdb.selectRandMovie();
+                } else {
+                    mov = mdb.selectRandMovie(genre);
+                    Log.d("qwerty", "Поиск по жанру");
+                }
+                break;
+            case "SearchMoviesActivity":
+                //mov = mdb.getInfoMovieForId(idMovie);
+                //Log.d("qwerty", "mov = mdb.getInfoMovieForId(idMovie);");
+                //Log.d("qwerty", "idMovie: " + idMovie);
+               // break;
+            case "WhatchedActivity":
+                mov = mdb.getInfoMovieForId(idMovie);
+                btn_other.setVisibility(View.GONE);
+                btn_willWatch.setVisibility(View.GONE);
+                break;
         }
 
         Log.d("qwerty", "IdMovie: " + mov.getM_Id());
@@ -109,6 +125,9 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             txt_description.setText("Описание: " + mov.getM_description());
             txt_countries.setText("Страна: " + mov.getM_countries());
             txt_actors.setText("Актеры: " + mov.getM_actors());
+
+            Log.d("qwerty", "Id movie: " + mov.getM_Id());
+            Log.d("qwerty", "Название рисунка " + mov.getM_img());
 
             int idImg = SelectActivity.this.getResources().getIdentifier(mov.getM_img(), "drawable", getPackageName());
             //Log.d("qwerty", "idImg: " + idImg);
@@ -170,13 +189,6 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
             Log.d("qwerty", "Прошел по ветви false(нет фильма с заданным жанром)");
 
-           /* txt_title_movie.setVisibility(View.INVISIBLE);
-            txt_year.setVisibility(View.INVISIBLE);
-            txt_genre.setVisibility(View.INVISIBLE);
-            txt_actors.setVisibility(View.INVISIBLE);
-            txt_countries.setVisibility(View.INVISIBLE);
-            txt_description.setVisibility(View.INVISIBLE);
-            txt_director.setVisibility(View.INVISIBLE);*/
             btn_other.setVisibility(View.INVISIBLE);
             btn_willWatch.setVisibility(View.INVISIBLE);
 
