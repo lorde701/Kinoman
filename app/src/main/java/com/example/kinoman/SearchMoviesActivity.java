@@ -20,7 +20,7 @@ import com.example.kinoman.Source.MovieForSearch;
 
 import java.util.List;
 
-public class SearchMoviesActivity extends AppCompatActivity {
+public class SearchMoviesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieDataBase dataBase;
 
@@ -70,9 +70,15 @@ public class SearchMoviesActivity extends AppCompatActivity {
 
             // item.setOnClickListener(this);
             item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+
             linearLayout.addView(item);
         }
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

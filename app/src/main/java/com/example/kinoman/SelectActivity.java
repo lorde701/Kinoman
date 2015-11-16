@@ -54,7 +54,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         btn_other = (Button) findViewById(R.id.btn_other);
         btn_other.setOnClickListener(this);
 
-        btn_willWatch = (Button)findViewById(R.id.btn_willWatch);
+        btn_willWatch = (Button) findViewById(R.id.btn_willWatch);
         btn_willWatch.setOnClickListener(this);
 
 
@@ -80,54 +80,44 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         layout5.setOnClickListener(this);
 
         otherMovie();
-
     }
 
     protected void otherMovie() {
 
         mdb = new MovieDataBase(this);
 
-        //genre = getIntent().getStringExtra("genre");
-        mov = mdb.selectRandMovie();
+        genre = getIntent().getStringExtra("genre");
+
+        if(genre == null) {
+            mov = mdb.selectRandMovie();
+        }else {
+            mov =mdb.selectRandMovie(genre);
+            Log.d("qwerty", "Поиск по жанру");
+        }
 
         Log.d("qwerty", "IdMovie: " + mov.getM_Id());
         Log.d("qwerty", "GenreMovie: " + mov.getM_genre());
         Log.d("qwerty", "ImgMovie: " + mov.getM_img());
 
-        if(mov.getM_Id() != -10) {
-            setContentView(R.layout.activity_select);
+        if (mov.getM_Id() != -10) {
 
-            txt_title_movie.setVisibility(View.VISIBLE);
-            txt_year.setVisibility(View.VISIBLE);
-            txt_genre.setVisibility(View.VISIBLE);
-            txt_actors.setVisibility(View.VISIBLE);
-            txt_countries.setVisibility(View.VISIBLE);
-            txt_description.setVisibility(View.VISIBLE);
-            txt_director.setVisibility(View.VISIBLE);
 
             txt_title_movie.setText(mov.getM_title());
-
             txt_year.setText("Год выпуска: " + mov.getM_year());
-
             txt_genre.setText("Жанр: " + mov.getM_genre());
-
             txt_director.setText("Режиссер: " + mov.getM_director());
-
             txt_description.setText("Описание: " + mov.getM_description());
-
             txt_countries.setText("Страна: " + mov.getM_countries());
-
             txt_actors.setText("Актеры: " + mov.getM_actors());
 
             int idImg = SelectActivity.this.getResources().getIdentifier(mov.getM_img(), "drawable", getPackageName());
-            Log.d("qwerty", "idImg: " + idImg);
+            //Log.d("qwerty", "idImg: " + idImg);
             img.setImageDrawable(getResources().getDrawable(idImg));
 
-            Log.d("qwerty", "\nTitleMovie: " + txt_title_movie.getText());
-            Log.d("qwerty", "CountryMovie: " + txt_countries.getText());
-            Log.d("qwerty", "ImgMovie: " + mov.getM_img());
+            //Log.d("qwerty", "\nTitleMovie: " + txt_title_movie.getText());
             //Log.d("qwerty", "CountryMovie: " + txt_countries.getText());
-
+            //Log.d("qwerty", "ImgMovie: " + mov.getM_img());
+            //Log.d("qwerty", "CountryMovie: " + txt_countries.getText());
 
 
             switch (mov.getM_assessment()) {
