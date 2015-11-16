@@ -363,11 +363,10 @@ public class MovieDataBase {
         return str;
     }
 
-    public Movie selectRandMovie(String genre) {
+    public Movie selectRandMovie() {
         Movie movie;
         movie = new Movie();
-        if(genre != null) {
-            int idMovie = selectIdMovie();
+        int idMovie = selectIdMovie();
             if (idMovie != -10) {
                 movie = selectInfoMovie(idMovie);
                 movie.setM_genre(selectGenre(idMovie));
@@ -377,7 +376,7 @@ public class MovieDataBase {
                 return movie;
             } else //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 movie.setM_Id(-10);
-        }
+
         return movie;
     }
 

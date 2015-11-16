@@ -104,7 +104,7 @@ public class Movie {
         this.m_img = m_img;
     }
 
-    public int isM_flag() {
+    public int getM_flag() {
         return m_flag;
     }
 

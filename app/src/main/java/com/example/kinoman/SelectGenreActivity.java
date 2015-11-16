@@ -108,7 +108,7 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
                         int idCheckedRadioButton = radioGroup.getCheckedRadioButtonId();
                         String text = (String) ((RadioButton) findViewById(idCheckedRadioButton)).getText();
                         intent = new Intent(this, SelectActivity.class);
-                        intent.putExtra("genre", text);
+                        //intent.putExtra("genre", text);
                         startActivity(intent);
                 }
 

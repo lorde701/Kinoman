@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,13 +87,23 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
         mdb = new MovieDataBase(this);
 
-        genre = getIntent().getStringExtra("genre");
-        mov = mdb.selectRandMovie(genre);
+        //genre = getIntent().getStringExtra("genre");
+        mov = mdb.selectRandMovie();
+
+        Log.d("qwerty", "IdMovie: " + mov.getM_Id());
+        Log.d("qwerty", "GenreMovie: " + mov.getM_genre());
+        Log.d("qwerty", "ImgMovie: " + mov.getM_img());
 
         if(mov.getM_Id() != -10) {
-            //super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_select);
 
+            txt_title_movie.setVisibility(View.VISIBLE);
+            txt_year.setVisibility(View.VISIBLE);
+            txt_genre.setVisibility(View.VISIBLE);
+            txt_actors.setVisibility(View.VISIBLE);
+            txt_countries.setVisibility(View.VISIBLE);
+            txt_description.setVisibility(View.VISIBLE);
+            txt_director.setVisibility(View.VISIBLE);
 
             txt_title_movie.setText(mov.getM_title());
 
@@ -109,64 +120,73 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             txt_actors.setText("Актеры: " + mov.getM_actors());
 
             int idImg = SelectActivity.this.getResources().getIdentifier(mov.getM_img(), "drawable", getPackageName());
+            Log.d("qwerty", "idImg: " + idImg);
             img.setImageDrawable(getResources().getDrawable(idImg));
 
+            Log.d("qwerty", "\nTitleMovie: " + txt_title_movie.getText());
+            Log.d("qwerty", "CountryMovie: " + txt_countries.getText());
+            Log.d("qwerty", "ImgMovie: " + mov.getM_img());
+            //Log.d("qwerty", "CountryMovie: " + txt_countries.getText());
 
-        switch (mov.getM_assessment()) {
 
-            case 1:
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
-                break;
-            case 2:
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
-                break;
-            case 3:
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
-                break;
-            case 4:
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
-                break;
-            case 5:
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star2));
-                break;
-            default:
-                layout1.setBackground(getResources().getDrawable(R.drawable.star));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
-        }
+
+            switch (mov.getM_assessment()) {
+
+                case 1:
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    break;
+                case 2:
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    break;
+                case 3:
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    break;
+                case 4:
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    break;
+                case 5:
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star2));
+                    break;
+                default:
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+            }
 
 
         } else {
 
-            txt_title_movie.setVisibility(View.INVISIBLE);
+            Log.d("qwerty", "Прошел по ветви false(нет фильма с заданным жанром)");
+
+           /* txt_title_movie.setVisibility(View.INVISIBLE);
             txt_year.setVisibility(View.INVISIBLE);
             txt_genre.setVisibility(View.INVISIBLE);
             txt_actors.setVisibility(View.INVISIBLE);
             txt_countries.setVisibility(View.INVISIBLE);
             txt_description.setVisibility(View.INVISIBLE);
-            txt_director.setVisibility(View.INVISIBLE);
+            txt_director.setVisibility(View.INVISIBLE);*/
             btn_other.setVisibility(View.INVISIBLE);
             btn_willWatch.setVisibility(View.INVISIBLE);
 
