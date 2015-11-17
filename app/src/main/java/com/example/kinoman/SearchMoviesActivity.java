@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,6 +21,7 @@ import com.example.kinoman.Source.MovieForSearch;
 import java.util.List;
 
 public class SearchMoviesActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     private MovieDataBase dataBase;
     LinearLayout linearLayout;
@@ -41,6 +40,8 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
 
         linearLayout = (LinearLayout) findViewById(R.id.linear);
         LayoutInflater inflater = this.getLayoutInflater();
+
+
 
 
         if (list.isEmpty()) {
@@ -71,7 +72,43 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
             TextView title = (TextView) item.findViewById(R.id.txt_title);
             title.setText(movieForSearch.getTitleMovie());
 
-           // TextView assessment = (TextView)item.findViewById();
+
+
+            Log.d("qwerty", "Оценка: " + movieForSearch.getWatchedOrNot());
+
+
+            if(movieForSearch.getWatchedOrNot() != 6) {
+                ImageView assessment = (ImageView)findViewById(R.id.img_assessment);
+                int id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("s" + movieForSearch.getWatchedOrNot(), "drawable", getPackageName());
+                assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+            }
+
+            /*switch (movieForSearch.getWatchedOrNot()) {
+                case 5:
+                    id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("s5", "drawable", getPackageName());
+                    assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+                    break;
+                case 1:
+                    id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("s1", "drawable", getPackageName());
+                    assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+                    break;
+                case 0:
+                    id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("eye1", "drawable", getPackageName());
+                    assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+                    break;
+                case 2:
+                    id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("s2", "drawable", getPackageName());
+                    assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+                    break;
+                case 3:
+                    id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("s3", "drawable", getPackageName());
+                    assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+                    break;
+                case 4:
+                  /*  id_img_assessment = SearchMoviesActivity.this.getResources().getIdentifier("s4", "drawable", getPackageName());
+                   assessment.setImageDrawable(getResources().getDrawable(id_img_assessment));
+                    break;
+            }*/
 
             // item.setOnClickListener(this);
             item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;

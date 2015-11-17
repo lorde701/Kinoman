@@ -33,6 +33,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     Button btn_other;
     Button btn_willWatch;
 
+    LinearLayout layout0;
     LinearLayout layout1;
     LinearLayout layout2;
     LinearLayout layout3;
@@ -68,12 +69,14 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         txt_actors = (TextView) findViewById(R.id.txt_actors);
         img = (ImageView) findViewById(R.id.img);
 
+        layout0 = (LinearLayout) findViewById(R.id.layout0);
         layout1 = (LinearLayout) findViewById(R.id.layout1);
         layout2 = (LinearLayout) findViewById(R.id.layout2);
         layout3 = (LinearLayout) findViewById(R.id.layout3);
         layout4 = (LinearLayout) findViewById(R.id.layout4);
         layout5 = (LinearLayout) findViewById(R.id.layout5);
 
+        layout0.setOnClickListener(this);
         layout1.setOnClickListener(this);
         layout2.setOnClickListener(this);
         layout3.setOnClickListener(this);
@@ -140,8 +143,16 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
 
             switch (mov.getM_assessment()) {
+                case 0:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
+                    layout1.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout2.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
 
                 case 1:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                     layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout2.setBackground(getResources().getDrawable(R.drawable.star));
                     layout3.setBackground(getResources().getDrawable(R.drawable.star));
@@ -149,6 +160,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                     layout5.setBackground(getResources().getDrawable(R.drawable.star));
                     break;
                 case 2:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                     layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout3.setBackground(getResources().getDrawable(R.drawable.star));
@@ -156,6 +168,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                     layout5.setBackground(getResources().getDrawable(R.drawable.star));
                     break;
                 case 3:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                     layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout3.setBackground(getResources().getDrawable(R.drawable.star2));
@@ -163,6 +176,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                     layout5.setBackground(getResources().getDrawable(R.drawable.star));
                     break;
                 case 4:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                     layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout3.setBackground(getResources().getDrawable(R.drawable.star2));
@@ -170,6 +184,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                     layout5.setBackground(getResources().getDrawable(R.drawable.star));
                     break;
                 case 5:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                     layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                     layout3.setBackground(getResources().getDrawable(R.drawable.star2));
@@ -177,6 +192,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                     layout5.setBackground(getResources().getDrawable(R.drawable.star2));
                     break;
                 default:
+                    layout0.setBackground(getResources().getDrawable(R.drawable.eye1));
                     layout1.setBackground(getResources().getDrawable(R.drawable.star));
                     layout2.setBackground(getResources().getDrawable(R.drawable.star));
                     layout3.setBackground(getResources().getDrawable(R.drawable.star));
@@ -220,7 +236,17 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_other:
                 otherMovie();
                 break;
+            case R.id.action0:
+                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
+                layout1.setBackground(getResources().getDrawable(R.drawable.star));
+                layout2.setBackground(getResources().getDrawable(R.drawable.star));
+                layout3.setBackground(getResources().getDrawable(R.drawable.star));
+                layout4.setBackground(getResources().getDrawable(R.drawable.star));
+                layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                database.setAssessment(mov.getM_Id(), 0);
+                break;
             case R.id.layout1:
+                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                 layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout2.setBackground(getResources().getDrawable(R.drawable.star));
                 layout3.setBackground(getResources().getDrawable(R.drawable.star));
@@ -230,6 +256,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 //mdb.setAssessment(mov.getM_Id(), 1);
                 break;
             case R.id.layout2:
+                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                 layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout3.setBackground(getResources().getDrawable(R.drawable.star));
@@ -239,6 +266,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 // mdb.setAssessment(mov.getM_Id(), 2);
                 break;
             case R.id.layout3:
+                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                 layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout3.setBackground(getResources().getDrawable(R.drawable.star2));
@@ -248,6 +276,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 //mdb.setAssessment(mov.getM_Id(), 3);
                 break;
             case R.id.layout4:
+                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                 layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout3.setBackground(getResources().getDrawable(R.drawable.star2));
@@ -257,6 +286,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                 //mdb.setAssessment(mov.getM_Id(), 4);
                 break;
             case R.id.layout5:
+                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
                 layout1.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout2.setBackground(getResources().getDrawable(R.drawable.star2));
                 layout3.setBackground(getResources().getDrawable(R.drawable.star2));
