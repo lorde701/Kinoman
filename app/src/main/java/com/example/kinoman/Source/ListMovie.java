@@ -5,13 +5,13 @@ import android.media.Image;
 /**
  * Created by ivanka on 12.11.15.
  */
-public class MovieForSearch {
+public class ListMovie {
     private int idMovie;
     private String  titleMovie;
     private String img;
     private int watchedOrNot;
 
-    public MovieForSearch(int IdMovie, String TitleMovie, String Img, int WatchedOrNot) {
+    public ListMovie(int IdMovie, String TitleMovie, String Img, int WatchedOrNot) {
         this.idMovie = IdMovie;
         this.titleMovie = TitleMovie;
         this.img = Img;

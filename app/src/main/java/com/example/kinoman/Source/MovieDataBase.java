@@ -1,15 +1,12 @@
 package com.example.kinoman.Source;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.kinoman.ClFrDwn.FilmObjectForDownload;
-import com.example.kinoman.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -588,9 +585,9 @@ public class MovieDataBase {
     }
 
 
-    public List<MovieForSearch> getListMovie(String search) {
+    public List<ListMovie> getListMovie(String search) {
 
-        List<MovieForSearch> list = new ArrayList<>();
+        List<ListMovie> list = new ArrayList<>();
 
         open();
         Cursor c;
@@ -609,7 +606,7 @@ public class MovieDataBase {
 
         if (c.moveToFirst()) {
             do {
-                MovieForSearch temp = new MovieForSearch(c.getInt(index_id), c.getString(index_title), c.getString(index_img), c.getInt(index_assessment));
+                ListMovie temp = new ListMovie(c.getInt(index_id), c.getString(index_title), c.getString(index_img), c.getInt(index_assessment));
                 list.add(temp);
             } while (c.moveToNext());
         }
@@ -675,8 +672,8 @@ public class MovieDataBase {
         close();
         return list;
     }
-    public List<MovieForSearch> getWatchedMovie() {
-        List<MovieForSearch> list = new ArrayList<>();
+    public List<ListMovie> getWatchedMovie() {
+        List<ListMovie> list = new ArrayList<>();
 
         open();
         Cursor c;
@@ -693,7 +690,7 @@ public class MovieDataBase {
 
         if (c.moveToFirst()) {
             do {
-                MovieForSearch temp = new MovieForSearch(c.getInt(index_id), c.getString(index_title), c.getString(index_img), c.getInt(index_assessment));
+                ListMovie temp = new ListMovie(c.getInt(index_id), c.getString(index_title), c.getString(index_img), c.getInt(index_assessment));
                 list.add(temp);
             } while (c.moveToNext());
         }

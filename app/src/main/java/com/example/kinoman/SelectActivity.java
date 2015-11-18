@@ -28,6 +28,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
     TextView txt_director;
     TextView txt_actors;
     TextView txt_description;
+    TextView txt_assessment;
     ImageView img;
 
     Button btn_other;
@@ -67,6 +68,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         txt_description = (TextView) findViewById(R.id.txt_description);
         txt_countries = (TextView) findViewById(R.id.txt_country);
         txt_actors = (TextView) findViewById(R.id.txt_actors);
+        txt_assessment = (TextView)findViewById(R.id.txt_assessment);
         img = (ImageView) findViewById(R.id.img);
 
         layout0 = (LinearLayout) findViewById(R.id.layout0);
@@ -128,6 +130,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             txt_description.setText("Описание: " + mov.getM_description());
             txt_countries.setText("Страна: " + mov.getM_countries());
             txt_actors.setText("Актеры: " + mov.getM_actors());
+            txt_assessment.setText("Ваша оценка");
 
             Log.d("qwerty", "Id movie: " + mov.getM_Id());
             Log.d("qwerty", "Название рисунка " + mov.getM_img());
