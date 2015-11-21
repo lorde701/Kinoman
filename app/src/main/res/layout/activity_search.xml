@@ -3,126 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kinoman.SearchActivity"
-    android:orientation="vertical">
-
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Введите название фильма"
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal|top" />
-    </FrameLayout>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_txt" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Поиск"
-            android:id="@+id/search_btn_search"
-            android:layout_gravity="center_horizontal|bottom" />
-    </FrameLayout>
-
-</LinearLayout>
-
-
-<!--
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_films"
     tools:context="com.example.kinoman.SearchActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/search_background_layout">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/linearLayout"
-                android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/linearLayout"
-                android:text="Введите название фильма"
-                android:textColor="@color/search_text"
-                android:textSize="25sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:text="Введите название фильма" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/search_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/search_btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:text="Поиск"
+                    android:textSize="22sp"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="15"
+                    android:textColor="#FFFFFF"
+                    android:shadowColor="#FFBFCA"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/main_btn_search"/>
+            </FrameLayout>
         </LinearLayout>
 
 
-LinearLayout
-android:layout_width="match_parent"
-android:layout_height="27dp"
-android:layout_weight="0.06"
-android:background="@drawable/search_background_layout">
+    </FrameLayout>
 
-<EditText
-    android:id="@+id/search_txt"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="qwe"
-    android:layout_marginBottom="70dp"
-    android:textColor="@color/search_text"
-    android:textSize="25sp" />
 </LinearLayout>
 
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="27dp"
-android:layout_weight="0.06"
-android:background="@drawable/search_background_layout">
-
-<Button
-    android:id="@+id/search_btn_search"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginBottom="25dp"
-    android:background="@drawable/main_btn_select"
-    android:text="Поиск"
-    android:textColor="@color/search_text"
-    android:textSize="20sp" />
-</LinearLayout>
-
-    </LinearLayout>
-
-    </LinearLayout>
-
--->

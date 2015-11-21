@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.kinoman.Source.Movie;
@@ -43,6 +44,8 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
     String genre;
 
+    ScrollView scroll;
+
 
     MovieDataBase mdb;
     Movie mov;
@@ -70,6 +73,8 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
         txt_actors = (TextView) findViewById(R.id.txt_actors);
         txt_assessment = (TextView)findViewById(R.id.txt_assessment);
         img = (ImageView) findViewById(R.id.img);
+
+        scroll = (ScrollView)findViewById(R.id.scrollView);
 
         layout0 = (LinearLayout) findViewById(R.id.layout0);
         layout1 = (LinearLayout) findViewById(R.id.layout1);
@@ -124,12 +129,14 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
 
             txt_title_movie.setText(mov.getM_title());
-            txt_year.setText("Год выпуска: " + mov.getM_year());
-            txt_genre.setText("Жанр: " + mov.getM_genre());
-            txt_director.setText("Режиссер: " + mov.getM_director());
-            txt_description.setText("Описание: " + mov.getM_description());
-            txt_countries.setText("Страна: " + mov.getM_countries());
-            txt_actors.setText("Актеры: " + mov.getM_actors());
+            txt_year.setText("Год выпуска: " + mov.getM_year() + "\n");
+            //txt_year.setSele(0, 11);
+            //String tempString = getString(R.string.tempGanre) ;
+            txt_genre.setText("Жанр: " + mov.getM_director() + "\n");
+            txt_director.setText("Режиссер: " + mov.getM_director() + "\n");
+            txt_description.setText("Описание: " + mov.getM_description() + "\n");
+            txt_countries.setText("Страна: " + mov.getM_countries() + "\n");
+            txt_actors.setText("Актеры: " + mov.getM_actors() + "\n");
             txt_assessment.setText("Ваша оценка");
 
             Log.d("qwerty", "Id movie: " + mov.getM_Id());
@@ -202,7 +209,7 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
                     layout4.setBackground(getResources().getDrawable(R.drawable.star));
                     layout5.setBackground(getResources().getDrawable(R.drawable.star));
             }
-
+            scroll.scrollTo(0,0);
 
         } else {
 

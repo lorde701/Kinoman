@@ -66,7 +66,6 @@ public class MovieDataBase {
             //cv.put(dbh.TM_DIRECTOR, film.getDirector());
             cv.put(dbh.TM_DESCRIPTION, film.getDescription());
             cv.put(dbh.TM_ASSESSMENT, 6);
-            cv.put(dbh.TM_FLAG, 0);
             cv.put(dbh.TM_IMAGE, MT_img[i]);
             cv.put(dbh.TM_DIRECTOR, addDirector(film.getDirector()));
             id_movie = (int) db.insert(dbh.TABLE_NAME_MOVIE, null, cv);
@@ -265,8 +264,6 @@ public class MovieDataBase {
             movie.setM_assessment(c.getInt(id));
             id = c.getColumnIndex(dbh.TM_IMAGE);
             movie.setM_img(c.getString(id));
-            id = c.getColumnIndex(dbh.TM_FLAG);
-            movie.setM_flag(c.getInt(id));
         }
         db.close();
         return movie;

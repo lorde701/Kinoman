@@ -25,7 +25,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TM_DESCRIPTION = "description_movie";
     public static final String TM_ASSESSMENT = "assessment_movie";
     public static final String TM_IMAGE = "image_movie";
-    public static final String TM_FLAG = "flag_movie";
     public static final String TM_ID = "_id";
 
 
@@ -39,7 +38,6 @@ public class DBHelper extends SQLiteOpenHelper {
            // + TM_ACTORS + " integer,"
             + TM_DESCRIPTION + " text,"
             + TM_ASSESSMENT + " integer,"
-            + TM_FLAG + " integer,"
             + TM_IMAGE + " text);";
 
    // public static final String ID_MOVIE = "id";

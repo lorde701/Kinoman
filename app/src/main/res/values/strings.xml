@@ -13,4 +13,6 @@
     <string name="title_activity_search_movie_">Search_movie_Activity</string>
     <string name="title_activity_search_movies">SearchMoviesActivity</string>
     <string name="title_activity_select_genre">SelectGenreActivity</string>
+
+    <string name="tempGanre"><b>ЖАнр</b></string>
 </resources>
