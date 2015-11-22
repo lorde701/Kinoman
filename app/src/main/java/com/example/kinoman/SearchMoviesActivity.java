@@ -72,7 +72,7 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
 
 
 
-            Log.d("qwerty", "Оценка: " + listMovie.getWatchedOrNot());
+            //Log.d("qwerty", "Оценка: " + listMovie.getWatchedOrNot());
 
 
             if(listMovie.getWatchedOrNot() != 6) {
@@ -94,10 +94,10 @@ public class SearchMoviesActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
 
         int id = v.getId();
-        Log.d("qwerty", "SearchMovieActivity idMovie: " + id);
+        //Log.d("qwerty", "SearchMovieActivity idMovie: " + id);
         Intent intent = new Intent(this, SelectActivity.class);
         intent.putExtra("flag", "SearchMoviesActivity");
-        Log.d("qwerty", "intent.putExtra(\"flag\", \"SearchMoviesActivity\");");
+        //Log.d("qwerty", "intent.putExtra(\"flag\", \"SearchMoviesActivity\");");
         intent.putExtra("idMovie", id);
         startActivity(intent);
     }

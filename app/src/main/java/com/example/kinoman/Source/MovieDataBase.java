@@ -58,6 +58,16 @@ public class MovieDataBase {
 
         String[] MT_img = datasForDB.TM_img;
 
+        /*
+        try {
+            open();
+            db.beginTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();              //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
+*/
         for (int i = 0; i < films.size(); ++i) {
             int id_movie;
             FilmObjectForDownload film = films.get(i);
@@ -74,6 +84,10 @@ public class MovieDataBase {
             addLinkMovieActor(id_movie, film.getActors());
             //count_movies = id_movie;
         }
+
+        Cursor c = db.query(dbh.TABLE_NAME_DIRECTOR, null, null, null, null, null, null);
+        logCursor(c);
+
 
         close();
     }
@@ -123,7 +137,7 @@ public class MovieDataBase {
     public int selectIdMovie(String genre) {
         int rand_ID = -10;
         int i = 0;
-        int[] arrayIdMovie = new int[100];
+
 
         open();
         Cursor c, cursor;
@@ -137,33 +151,42 @@ public class MovieDataBase {
         int idGenre = c.getInt(c.getColumnIndex(dbh.TG_ID_GENRE));
         //Log.d("qwerty", "IdGenre in selectIdMovie in MovieDataBase: " + idGenre);
 
-        String idM = "select " + dbh.TLMG_ID_MOVIE + " from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + dbh.TLMG_ID_GENRE + " = " + idGenre + ";";
-        c = db.rawQuery(idM, new String[]{});
+        String countSql = "select count(*) from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + dbh.TLMG_ID_GENRE + " = " + idGenre + ";";
+        c = db.rawQuery(countSql, new String[]{});
+        if (c.moveToFirst()) {
 
-        c.moveToFirst();
-        do {
-            int idMovie = c.getInt(c.getColumnIndex(dbh.TLMG_ID_MOVIE));
-            Log.d("qwerty", "IdMovie(не учитывая оценку) in selectIdMovie in MovieDataBase: " + idGenre);
-            String selectIdM = "select " + dbh.TM_ID + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6 and " +
-                    dbh.TM_ID + " = " + idMovie + ";";
-            cursor = db.rawQuery(selectIdM, new String[]{});
-            Log.d("qwerty", "selectIdM in selectIdMovie in MovieDataBase: " + selectIdM);
+            int count = c.getInt(c.getColumnIndex("count(*)"));
+            Log.d("qwerty", "Количество фильмов: " + count);
 
-            if (cursor.moveToFirst()) {
-                int idMovieToSelect = cursor.getInt(cursor.getColumnIndex(dbh.TM_ID));
-                arrayIdMovie[i++] = idMovieToSelect;
+            int[] arrayIdMovie = new int[count];
+
+            String idM = "select " + dbh.TLMG_ID_MOVIE + " from " + dbh.TABLE_NAME_LINK_MOVIE_GENRE + " where " + dbh.TLMG_ID_GENRE + " = " + idGenre + ";";
+            c = db.rawQuery(idM, new String[]{});
+
+            c.moveToFirst();
+            do {
+                int idMovie = c.getInt(c.getColumnIndex(dbh.TLMG_ID_MOVIE));
+                Log.d("qwerty", "IdMovie(не учитывая оценку) in selectIdMovie in MovieDataBase: " + idGenre);
+                String selectIdM = "select " + dbh.TM_ID + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6 and " +
+                        dbh.TM_ID + " = " + idMovie + ";";
+                cursor = db.rawQuery(selectIdM, new String[]{});
+                //Log.d("qwerty", "selectIdM in selectIdMovie in MovieDataBase: " + selectIdM);
+
+                if (cursor.moveToFirst()) {
+                    int idMovieToSelect = cursor.getInt(cursor.getColumnIndex(dbh.TM_ID));
+                    arrayIdMovie[i++] = idMovieToSelect;
+                }
+
+            } while (c.moveToNext());
+
+            if (i > 0) {
+                Random rand = new Random();
+                int index = rand.nextInt(i);
+               // Log.d(LOG_TAG_DB, "Index: " + index);
+               // Log.d(LOG_TAG_DB, " ");
+                rand_ID = arrayIdMovie[index];
             }
-
-        } while (c.moveToNext());
-
-        if (i > 0) {
-            Random rand = new Random();
-            int index = rand.nextInt(i);
-            Log.d(LOG_TAG_DB, "Index: " + index);
-            Log.d(LOG_TAG_DB, " ");
-            rand_ID = arrayIdMovie[index];
         }
-
         close();
         return rand_ID;
     }
@@ -173,14 +196,18 @@ public class MovieDataBase {
         Cursor c;
         int rand_num = -10;
         int i = 0;
-        int[] array = new int[35];
+       // int[] array = new int[35];
 
-        String selectCount = "select count(" + dbh.TM_ID + ") from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6 ;";
+        //String selectCount = "select count(" + dbh.TM_ID + ") from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6 ;";
+        String selectCount = "select count(*) from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6 ;";
         c = db.rawQuery(selectCount, new String[]{});
         if (c.moveToFirst()) {
 
-            int count = c.getCount();
+            int count = c.getInt(c.getColumnIndex("count(*)"));
+            //int count = c.getCount();
             Log.d("qwerty", "Количество фильмов: " + count);
+
+            int[] array = new int[count];
 
             String select = "select " + dbh.TM_ID + " from " + dbh.TABLE_NAME_MOVIE + " where " + dbh.TM_ASSESSMENT + " = 6 ;";
             c = db.rawQuery(select, new String[]{});
@@ -199,8 +226,8 @@ public class MovieDataBase {
 
                 Random rand = new Random();
                 int index = rand.nextInt(i);
-                Log.d(LOG_TAG_DB, "Index: " + index);
-                Log.d(LOG_TAG_DB, " ");
+                //Log.d(LOG_TAG_DB, "Index: " + index);
+               // Log.d(LOG_TAG_DB, " ");
                 rand_num = array[index];
             }
         }
@@ -400,7 +427,24 @@ public class MovieDataBase {
         Cursor c;
         open();
 
-        String whatSelect = dbh.TD_ID_DIRECTOR + " = \"" + rand_num + "\"";
+        String sql = "select " + dbh.TM_DIRECTOR + " from " + dbh.TABLE_NAME_MOVIE
+                + " where " + dbh.TM_ID + " = \"" + rand_num + "\";";
+
+        Log.d("qwerty", "SQL: " + sql);
+
+        c = db.rawQuery(sql, new String[] {});
+        logCursor(c);
+
+        c.moveToFirst();
+
+        int qwerwqer = c.getColumnIndex(dbh.TM_DIRECTOR);
+        Log.d("qwerty", "qweqweqwe: " + qwerwqer);
+        Log.d("qwerty", "idDir: " + c.getInt(qwerwqer));
+        int idDir = c.getInt(qwerwqer);
+
+
+
+        String whatSelect = dbh.TD_ID_DIRECTOR + " = \"" + idDir + "\"";
 
         c = db.query(dbh.TABLE_NAME_DIRECTOR, null, whatSelect, null, null, null, null);
         if (c.moveToFirst()) {

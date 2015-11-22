@@ -1,5 +1,7 @@
 package com.example.kinoman;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +26,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.kinoman.ClFrDwn.FilmObjectForDownload;
+import com.example.kinoman.ClFrDwn.HtmlHelper;
+import com.example.kinoman.Source.MovieDataBase;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button btn_about;
@@ -31,7 +41,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_search;
     Button btn_watched;
     Button btn_add;
+    Button btn_update;
+
     final String LOG_TAG = "myLogs";
+
+    private ProgressDialog pd;
+
+    MovieDataBase movieDataBase;
+
+    List<FilmObjectForDownload> filmObjectForDownloads;
+
+    String[] siteLinks = {
+            "https://my-hit.org/film/1741/",    //1 розыгрыш
+            "https://my-hit.org/film/108/",     //2 гордость и предубеждение
+            "https://my-hit.org/film/322283/",  //3 Человек-муравей
+            "https://my-hit.org/film/398576/",  //4Багровый пик
+            "https://my-hit.org/film/415223/",  //5Свободное падение
+            "https://my-hit.org/film/415226/",  //6Перезагрузка
+            "https://my-hit.org/film/239317/",  //7Игра в имитацию
+            "https://my-hit.org/film/414894/",  //8Последний охотник на ведьм
+            "https://my-hit.org/film/3822/",    //9Всегда говори «ДА»
+            "https://my-hit.org/film/2628/",    //10
+            "https://my-hit.org/film/346390/",  //qwe11
+            "https://my-hit.org/film/2155/"   //12 добейся успеха
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_add = (Button)findViewById(R.id.btn_add);
         btn_add.setOnClickListener(this);
 
+        btn_update = (Button)findViewById(R.id.btn_update);
+        btn_update.setOnClickListener(this);
+
+        filmObjectForDownloads = new ArrayList<>();
+
+        movieDataBase = new MovieDataBase(this);
 
     }
 
@@ -94,14 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
                 break;
-            /*case R.id.btn_select:
-                Intent intent_select = new Intent(MainActivity.this, SelectActivity.class);
-                startActivity(intent_select);
-
-                break;*/
-
-
-
             case R.id.btn_watched:
                 intent = new Intent(MainActivity.this, WhatchedActivity.class);
                 startActivity(intent);
@@ -115,6 +146,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, SelectGenreActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.btn_update:
+                pd = ProgressDialog.show(this, "Working...", "Request to server", true, false);
+                new ParseSite().execute();
+                break;
+        }
+    }
+
+    private class ParseSite extends AsyncTask<String, Void, List<String>> {
+        //Фоновая операция
+        //protected List<String> doInBackground(String... arg) {
+        protected List<String> doInBackground(String... arg) {
+            try {
+                for (int i = 0; i < siteLinks.length; ++i) {
+                    HtmlHelper hh = new HtmlHelper(new URL(siteLinks[i]));
+                    filmObjectForDownloads.add(hh.getFilmFromSite());
+                }
+                movieDataBase.addDatas(filmObjectForDownloads);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        //Событие по окончанию парсинга
+        protected void onPostExecute(List<String> output) {
+            //Убираем диалог загрузки
+            pd.dismiss();
         }
     }
 

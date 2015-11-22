@@ -37,7 +37,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             "https://my-hit.org/film/3822/",    //9Всегда говори «ДА»
             "https://my-hit.org/film/2628/",    //10
             "https://my-hit.org/film/346390/",  //qwe11
-            "https://my-hit.org/film/2155/"     //12 добейся успеха
+            "https://my-hit.org/film/2155/"   //12 добейся успеха
     };
 
     List<FilmObjectForDownload> filmObjectForDownloads;
@@ -75,8 +75,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 new ParseSite().execute();
                 break;
             case R.id.btn_updata:
-                movieDataBase.addDatas(filmObjectForDownloads);
-                movieDataBase.checkMoves();
+                //movieDataBase.addDatas(filmObjectForDownloads);
+                //movieDataBase.checkMoves();
                 Log.d("filmObject", "Ожидаемое количество фильмов: " + Integer.toString(siteLinks.length));
                 Log.d("filmObject", "Скачанное количество фильмов: " + Integer.toString(filmObjectForDownloads.size()));
                 Log.d("workWithDataDase", "Ожидаемое количество фильмов: " + Integer.toString(siteLinks.length));
@@ -98,6 +98,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                     HtmlHelper hh = new HtmlHelper(new URL(siteLinks[i]));
                     filmObjectForDownloads.add(hh.getFilmFromSite());
                 }
+                movieDataBase.addDatas(filmObjectForDownloads);
             }
             catch(Exception e)
             {
@@ -111,49 +112,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         protected void onPostExecute(List<String> output) {
             //Убираем диалог загрузки
             pd.dismiss();
-/*
-            LinearLayout linLayout = (LinearLayout) findViewById(R.id.linLayout);
-            LayoutInflater ltInflater = getLayoutInflater();
-
-            linLayout.removeAllViews();
-
-            int i = 0;
-
-            for(FilmObjectForDownload filmObjectForDownload : filmObjectForDownloads) {
-
-                View item = ltInflater.inflate(R.layout.item_film, linLayout, false);
-                TextView tvTitle = (TextView) item.findViewById(R.id.tvTitle);
-                tvTitle.setText(filmObjectForDownload.getTitle());
-
-                TextView tvYear = (TextView) item.findViewById(R.id.tvYear);
-                tvYear.setText(filmObjectForDownload.getYear());
-
-                TextView tvGanres = (TextView) item.findViewById(R.id.tvGanres);
-                tvGanres.setText(filmObjectForDownload.getStringGanres());
-
-                TextView tvCountrys = (TextView) item.findViewById(R.id.tvCountrys);
-                tvCountrys.setText(filmObjectForDownload.getStringCountry());
-
-                TextView tvDirector = (TextView) item.findViewById(R.id.tvDirector);
-                tvDirector.setText(filmObjectForDownload.getDirector());
-
-                TextView tvActors = (TextView) item.findViewById(R.id.tvActors);
-                tvActors.setText(filmObjectForDownload.getStringActors());
-
-                TextView tvDescription = (TextView) item.findViewById(R.id.tvDescription);
-                tvDescription.setText(filmObjectForDownload.getDescription());
-
-                if(i % 2 == 0) {
-                    item.setBackgroundColor(Color.rgb(122, 205, 155));
-                } else {
-                    item.setBackgroundColor(Color.rgb(124, 122, 205));
-                }
-
-                ++i;
-
-                linLayout.addView(item);
-            }
-            */
         }
 
     }

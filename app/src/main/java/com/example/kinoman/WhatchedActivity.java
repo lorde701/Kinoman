@@ -39,7 +39,7 @@ public class WhatchedActivity extends AppCompatActivity implements View.OnClickL
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Оп-па-па")
-                    .setMessage("Фильма с таким названием в базе данных нет")
+                    .setMessage("Просмотренных фильмов нет")
                             //.setIcon(R.drawable.ic_android_cat)
                     .setCancelable(false)
                     .setNegativeButton("Ок",

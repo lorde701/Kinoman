@@ -129,14 +129,14 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
 
 
             txt_title_movie.setText(mov.getM_title());
-            txt_year.setText("Год выпуска: " + mov.getM_year() + "\n");
+            txt_year.setText("Год выпуска: " + mov.getM_year());
             //txt_year.setSele(0, 11);
             //String tempString = getString(R.string.tempGanre) ;
-            txt_genre.setText("Жанр: " + mov.getM_director() + "\n");
-            txt_director.setText("Режиссер: " + mov.getM_director() + "\n");
-            txt_description.setText("Описание: " + mov.getM_description() + "\n");
-            txt_countries.setText("Страна: " + mov.getM_countries() + "\n");
-            txt_actors.setText("Актеры: " + mov.getM_actors() + "\n");
+            txt_genre.setText("Жанр: " + mov.getM_genre());
+            txt_director.setText("Режиссер: " + mov.getM_director());
+            txt_description.setText("Описание: " + mov.getM_description());
+            txt_countries.setText("Страна: " + mov.getM_countries());
+            txt_actors.setText("Актеры: " + mov.getM_actors());
             txt_assessment.setText("Ваша оценка");
 
             Log.d("qwerty", "Id movie: " + mov.getM_Id());
@@ -152,66 +152,75 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             //Log.d("qwerty", "CountryMovie: " + txt_countries.getText());
 
 
+           /* layout0.setBackgroundResource(R.drawable.s0);
+            layout1.setBackgroundResource(R.drawable.star);
+            layout2.setBackgroundResource(R.drawable.star2);
+            layout3.setBackgroundResource(R.drawable.star);*/
+
+
+
             switch (mov.getM_assessment()) {
                 case 0:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout0.setBackgroundResource(R.drawable.s0);
+                    layout1.setBackgroundResource(R.drawable.star);
+                    layout2.setBackgroundResource(R.drawable.star);
+                    layout3.setBackgroundResource(R.drawable.star);
+                    layout4.setBackgroundResource(R.drawable.star);
+                    layout5.setBackgroundResource(R.drawable.star);
 
                 case 1:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout0.setBackgroundResource(R.drawable.s0);
+                    layout1.setBackgroundResource(R.drawable.star2);
+                    layout2.setBackgroundResource(R.drawable.star);
+                    layout3.setBackgroundResource(R.drawable.star);
+                    layout4.setBackgroundResource(R.drawable.star);
+                    layout5.setBackgroundResource(R.drawable.star);
                     break;
                 case 2:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout0.setBackgroundResource(R.drawable.s0);
+                    layout1.setBackgroundResource(R.drawable.star2);
+                    layout2.setBackgroundResource(R.drawable.star2);
+                    layout3.setBackgroundResource(R.drawable.star);
+                    layout4.setBackgroundResource(R.drawable.star);
+                    layout5.setBackgroundResource(R.drawable.star);
                     break;
                 case 3:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout0.setBackgroundResource(R.drawable.s0);
+                    layout1.setBackgroundResource(R.drawable.star2);
+                    layout2.setBackgroundResource(R.drawable.star2);
+                    layout3.setBackgroundResource(R.drawable.star2);
+                    layout4.setBackgroundResource(R.drawable.star);
+                    layout5.setBackgroundResource(R.drawable.star);
                     break;
                 case 4:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout0.setBackgroundResource(R.drawable.s0);
+                    layout1.setBackgroundResource(R.drawable.star2);
+                    layout2.setBackgroundResource(R.drawable.star2);
+                    layout3.setBackgroundResource(R.drawable.star2);
+                    layout4.setBackgroundResource(R.drawable.star2);
+                    layout5.setBackgroundResource(R.drawable.star);
                     break;
                 case 5:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star2));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star2));
+                    layout0.setBackgroundResource(R.drawable.s0);
+                    layout1.setBackgroundResource(R.drawable.star2);
+                    layout2.setBackgroundResource(R.drawable.star2);
+                    layout3.setBackgroundResource(R.drawable.star2);
+                    layout4.setBackgroundResource(R.drawable.star2);
+                    layout5.setBackgroundResource(R.drawable.star2);
                     break;
                 default:
-                    layout0.setBackground(getResources().getDrawable(R.drawable.eye1));
-                    layout1.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                    layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                    layout0.setBackgroundResource(R.drawable.eye1);
+                    layout1.setBackgroundResource(R.drawable.star);
+                    layout2.setBackgroundResource(R.drawable.star);
+                    layout3.setBackgroundResource(R.drawable.star);
+                    layout4.setBackgroundResource(R.drawable.star);
+                    layout5.setBackgroundResource(R.drawable.star);
             }
+
             scroll.scrollTo(0,0);
 
         } else {
+
 
             Log.d("qwerty", "Прошел по ветви false(нет фильма с заданным жанром)");
 
@@ -219,17 +228,17 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             btn_willWatch.setVisibility(View.INVISIBLE);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Оп-па-па")
-                    .setMessage("Непросмотренных фильмов данного жанра нет")
-                            //.setIcon(R.drawable.ic_android_cat)
-                    .setCancelable(false)
-                    .setNegativeButton("Ок",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                    finish();
-                                }
-                            });
+                    builder.setTitle("Оп-па-па")
+                            .setMessage("Непросмотренных фильмов данного жанра нет")
+                                    //.setIcon(R.drawable.ic_android_cat)
+                            .setCancelable(false)
+                            .setNegativeButton("Ок",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                            finish();
+                                        }
+                                    });
             AlertDialog alert = builder.create();
             alert.show();
         }
@@ -246,62 +255,62 @@ public class SelectActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_other:
                 otherMovie();
                 break;
-            case R.id.action0:
-                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                layout1.setBackground(getResources().getDrawable(R.drawable.star));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
+            case R.id.layout0:
+                layout0.setBackgroundResource(R.drawable.s0);
+                layout1.setBackgroundResource(R.drawable.star);
+                layout2.setBackgroundResource(R.drawable.star);
+                layout3.setBackgroundResource(R.drawable.star);
+                layout4.setBackgroundResource(R.drawable.star);
+                layout5.setBackgroundResource(R.drawable.star);
                 database.setAssessment(mov.getM_Id(), 0);
                 break;
             case R.id.layout1:
-                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                layout0.setBackgroundResource(R.drawable.s0);
+                layout1.setBackgroundResource(R.drawable.star2);
+                layout2.setBackgroundResource(R.drawable.star);
+                layout3.setBackgroundResource(R.drawable.star);
+                layout4.setBackgroundResource(R.drawable.star);
+                layout5.setBackgroundResource(R.drawable.star);
                 database.setAssessment(mov.getM_Id(), 1);
                 //mdb.setAssessment(mov.getM_Id(), 1);
                 break;
             case R.id.layout2:
-                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                layout0.setBackgroundResource(R.drawable.s0);
+                layout1.setBackgroundResource(R.drawable.star2);
+                layout2.setBackgroundResource(R.drawable.star2);
+                layout3.setBackgroundResource(R.drawable.star);
+                layout4.setBackgroundResource(R.drawable.star);
+                layout5.setBackgroundResource(R.drawable.star);
                 database.setAssessment(mov.getM_Id(), 2);
                 // mdb.setAssessment(mov.getM_Id(), 2);
                 break;
             case R.id.layout3:
-                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                layout0.setBackgroundResource(R.drawable.s0);
+                layout1.setBackgroundResource(R.drawable.star2);
+                layout2.setBackgroundResource(R.drawable.star2);
+                layout3.setBackgroundResource(R.drawable.star2);
+                layout4.setBackgroundResource(R.drawable.star);
+                layout5.setBackgroundResource(R.drawable.star);
                 database.setAssessment(mov.getM_Id(), 3);
                 //mdb.setAssessment(mov.getM_Id(), 3);
                 break;
             case R.id.layout4:
-                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star));
+                layout0.setBackgroundResource(R.drawable.s0);
+                layout1.setBackgroundResource(R.drawable.star2);
+                layout2.setBackgroundResource(R.drawable.star2);
+                layout3.setBackgroundResource(R.drawable.star2);
+                layout4.setBackgroundResource(R.drawable.star2);
+                layout5.setBackgroundResource(R.drawable.star);
                 database.setAssessment(mov.getM_Id(), 4);
                 //mdb.setAssessment(mov.getM_Id(), 4);
                 break;
             case R.id.layout5:
-                layout0.setBackground(getResources().getDrawable(R.drawable.s0));
-                layout1.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout2.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout3.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout4.setBackground(getResources().getDrawable(R.drawable.star2));
-                layout5.setBackground(getResources().getDrawable(R.drawable.star2));
+                layout0.setBackgroundResource(R.drawable.s0);
+                layout1.setBackgroundResource(R.drawable.star2);
+                layout2.setBackgroundResource(R.drawable.star2);
+                layout3.setBackgroundResource(R.drawable.star2);
+                layout4.setBackgroundResource(R.drawable.star2);
+                layout5.setBackgroundResource(R.drawable.star2);
                 database.setAssessment(mov.getM_Id(), 5);
                 //mdb.setAssessment(mov.getM_Id(), 5);
                 break;

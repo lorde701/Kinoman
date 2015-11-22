@@ -7,12 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
     tools:context="com.example.kinoman.SelectActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -63,6 +65,7 @@
 
                     <TextView
                         android:id="@+id/txt_year"
+                        android:layout_marginBottom="7dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -76,6 +79,7 @@
 
                     <TextView
                         android:id="@+id/txt_genre"
+                        android:layout_marginBottom="7dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -89,6 +93,7 @@
 
                     <TextView
                         android:id="@+id/txt_country"
+                        android:layout_marginBottom="7dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -102,6 +107,7 @@
 
                     <TextView
                         android:id="@+id/txt_director"
+                        android:layout_marginBottom="7dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -115,6 +121,7 @@
 
                     <TextView
                         android:id="@+id/txt_actors"
+                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -128,6 +135,7 @@
 
                     <TextView
                         android:id="@+id/txt_description"
+                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -232,24 +240,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_gravity="bottom"
+        android:layout_marginTop="5dp">
 
 
         <Button
             android:id="@+id/btn_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
             android:layout_gravity="bottom|left"
+            android:textColor="#757575"
+            android:background="@drawable/select_btn"
             android:text="Другой фильм" />
 
 
         <Button
             android:id="@+id/btn_willWatch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
             android:layout_gravity="bottom|right"
+            android:textColor="#757575"
+            android:background="@drawable/select_btn"
             android:text="Буду смотреть" />
 
     </FrameLayout>

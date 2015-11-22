@@ -32,7 +32,7 @@
             android:id="@+id/btn_select"
             android:textSize="22sp"
             android:layout_width="250dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="15"
@@ -47,7 +47,7 @@
             android:id="@+id/btn_search"
             android:textSize="22sp"
             android:layout_width="250dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="15"
@@ -62,7 +62,7 @@
             android:id="@+id/btn_watched"
             android:textSize="22sp"
             android:layout_width="250dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="15"
@@ -73,11 +73,26 @@
             android:background="@drawable/main_btn_watched"/>
 
         <Button
+            android:text="Обновить"
+            android:textSize="22sp"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="15"
+            android:textColor="#FFFFFF"
+            android:shadowColor="#FFBFCA"
+            android:layout_margin="5dp"
+            android:id="@+id/btn_update"
+            android:background="@drawable/main_btn_about"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
             android:text="О приложении"
             android:id="@+id/btn_about"
             android:textSize="22sp"
             android:layout_width="250dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="15"
@@ -85,7 +100,7 @@
             android:textColor="#FFFFFF"
             android:shadowColor="#FFBFCA"
             android:layout_margin="5dp"
-            android:background="@drawable/main_btn_about"/>
+            android:background="@drawable/main_btn_update"/>
 
     </LinearLayout>
 

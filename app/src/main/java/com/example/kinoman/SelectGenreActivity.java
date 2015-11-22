@@ -103,7 +103,7 @@ public class SelectGenreActivity extends AppCompatActivity implements View.OnCli
                 switch (radioGroup.getCheckedRadioButtonId()) {
                     case 0:
                         startActivity(intent);
-                        Log.d(LOG_CAT, "id radioBtn = 50");
+                        //Log.d(LOG_CAT, "id radioBtn = 50");
                         break;
                     default:
                         int idCheckedRadioButton = radioGroup.getCheckedRadioButtonId();
